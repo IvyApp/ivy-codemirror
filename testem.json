@@ -1,5 +1,6 @@
 {
   "framework": "qunit",
+  "launch_in_ci": ["PhantomJS"],
   "src_files": [
     "bower_components/jquery/dist/jquery.js",
     "bower_components/handlebars/handlebars.js",
