@@ -1,5 +1,7 @@
 # ivy-codemirror
 
+[![Build Status](https://travis-ci.org/IvyApp/ivy-codemirror.svg?branch=master)](https://travis-ci.org/IvyApp/ivy-codemirror)
+
 An [Ember][1] component for the excellent [CodeMirror][2] editor.
 
 ## Installation
