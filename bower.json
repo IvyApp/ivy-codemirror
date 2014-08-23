@@ -1,32 +1,6 @@
 {
   "name": "ivy-codemirror",
-  "version": "0.1.0",
-  "authors": [
-    "Dray Lacy"
-  ],
-  "description": "Ember component for CodeMirror.",
-  "main": "dist/globals/main.js",
-  "moduleType": [
-    "amd",
-    "globals",
-    "node"
-  ],
-  "keywords": [
-    "ember",
-    "codemirror"
-  ],
-  "license": "MIT",
-  "homepage": "https://github.com/IvyApp/ivy-codemirror",
-  "ignore": [
-    "**/.*",
-    "Brocfile.js",
-    "bower_components",
-    "node_modules",
-    "package.json",
-    "test",
-    "testem.json",
-    "tmp"
-  ],
+  "private": true,
   "devDependencies": {
     "ember-qunit": "~0.1.8"
   },
