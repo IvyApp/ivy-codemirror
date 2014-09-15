@@ -44,6 +44,29 @@ function optionTest(key, beforeValue, afterValue) {
     equal(codeMirror.getOption(key), afterValue,
           key + ' option is updated after ' + key + ' property is changed');
   });
+
+  test('should update CodeMirror ' + key + ' option when bound to a property whose dependencies change', function() {
+    var context = Ember.Object.createWithMixins({
+      actualValue: beforeValue,
+      computedValue: Ember.computed.readOnly('actualValue')
+    });
+
+    var componentOptions = { foo: context };
+    componentOptions[key + 'Binding'] = 'foo.computedValue';
+    var component = this.subject(componentOptions);
+    this.append();
+
+    var codeMirror = component.get('codeMirror');
+    equal(codeMirror.getOption(key), beforeValue,
+          'precond - initial value of ' + key + ' option is correct');
+
+    Ember.run(function() {
+      context.set('actualValue', afterValue);
+    });
+
+    equal(codeMirror.getOption(key), afterValue,
+          key + ' option is updated after ' + key + ' property is changed');
+  });
 }
 
 optionTest('autofocus', false, true);
