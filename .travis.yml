@@ -1,4 +1,7 @@
 language: node_js
 notifications:
   slack:
-    secure: kPp1bt7qIycjsEpP4rWPCu4SBfrkQpYMKDIAr2NK22JBOrftzZQPaUr2eOvbrxwXDEQ3qqYcHuzvIoAVo5/oYfBZjwKbMZVqoLVISj3pidTlsjbo6V7UAt4Gy1CuzYd+AU3CGhhf9TBhG0PFYnJXhFgaS2o9xudoiq+HlnZ79Hw=
+    on_success: change
+    on_failure: always
+    rooms:
+      - secure: kPp1bt7qIycjsEpP4rWPCu4SBfrkQpYMKDIAr2NK22JBOrftzZQPaUr2eOvbrxwXDEQ3qqYcHuzvIoAVo5/oYfBZjwKbMZVqoLVISj3pidTlsjbo6V7UAt4Gy1CuzYd+AU3CGhhf9TBhG0PFYnJXhFgaS2o9xudoiq+HlnZ79Hw=
