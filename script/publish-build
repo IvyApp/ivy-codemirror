@@ -10,7 +10,6 @@ COMPONENTS_REPO_SLUG="IvyApp/components-ivy-codemirror"
 USER="omghax"
 
 echo -e "COMPONENTS_REPO_SLUG: ${COMPONENTS_REPO_SLUG}\n"
-echo -e "INCLUDED_FILES: ${INCLUDED_FILES}\n"
 echo -e "CURRENT_BRANCH: ${TRAVIS_BRANCH}\n"
 
 # Set channel to publish to. If no suitable branch is found exit successfully.
