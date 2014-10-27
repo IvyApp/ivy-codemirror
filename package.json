@@ -4,6 +4,7 @@
   "description": "Ember component for CodeMirror.",
   "main": "dist/cjs/main.js",
   "scripts": {
+    "publish-build": "script/publish-build",
     "test": "script/test"
   },
   "repository": {
