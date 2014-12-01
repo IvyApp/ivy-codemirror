@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
-script/build
+
+echo "Building standalone library..."
+cd standalone
+rm -rf dist
+../node_modules/.bin/broccoli build dist
+
 git config --global user.email "dray@envylabs.com"
 git config --global user.name "Dray Lacy"
 
@@ -29,12 +34,10 @@ esac
 echo -e "CHANNEL: ${CHANNEL}\n"
 
 # Sending output to /dev/null to prevent GH_TOKEN leak on error.
-git clone --branch ${CHANNEL} https://${USER}:${GH_TOKEN}@github.com/${COMPONENTS_REPO_SLUG}.git bower_ivy_codemirror &> /dev/null
-for build in amd cjs globals named-amd; do
-  rm -rf bower_ivy_codemirror/${build}
-  cp -R dist/${build} bower_ivy_codemirror/${build}
-done
-cd bower_ivy_codemirror
+git clone --branch ${CHANNEL} https://${USER}:${GH_TOKEN}@github.com/${COMPONENTS_REPO_SLUG}.git bower_ivy_tabs &> /dev/null
+rm -rf bower_ivy_tabs/*
+cp -R dist/* bower_ivy_tabs/
+cd bower_ivy_tabs
 git remote rm origin
 
 # Sending output to /dev/null to prevent GH_TOKEN leak on error.

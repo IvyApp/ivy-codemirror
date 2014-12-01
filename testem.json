@@ -1,18 +1,11 @@
 {
   "framework": "qunit",
-  "launch_in_ci": ["PhantomJS"],
-  "src_files": [
-    "bower_components/jquery/dist/jquery.js",
-    "bower_components/handlebars/handlebars.js",
-    "bower_components/ember/ember.js",
-    "bower_components/ember-qunit/dist/globals/main.js",
-    "bower_components/codemirror/lib/codemirror.js",
-    "dist/globals/main.js",
-    "http://localhost:4200/globals/main.js",
-    "test/test-helper.js",
-    "test/**/*-test.js"
+  "test_page": "tests/index.html",
+  "launch_in_ci": [
+    "PhantomJS"
   ],
-  "watch_files": [
-    "lib/**/*.js"
+  "launch_in_dev": [
+    "PhantomJS",
+    "Chrome"
   ]
 }

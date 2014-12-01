@@ -1,4 +1,0 @@
-#!/bin/sh
-echo "# running script/build"
-rm -rf dist
-node_modules/.bin/broccoli build dist

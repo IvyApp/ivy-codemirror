@@ -1,4 +1,5 @@
-import CodeMirror from 'codemirror';
+/* global CodeMirror */
+// import CodeMirror from 'codemirror';
 import Ember from 'ember';
 
 export default Ember.Component.extend({

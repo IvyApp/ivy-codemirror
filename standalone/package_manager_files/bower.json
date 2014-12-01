@@ -1,0 +1,17 @@
+{
+  "name": "ivy-codemirror",
+  "version": "VERSION_STRING_PLACEHOLDER",
+  "authors": [
+    "Dray Lacy"
+  ],
+  "description": "Ember component for CodeMirror.",
+  "main": "./ivy-codemirror-VERSION_STRING_PLACEHOLDER.js",
+  "keywords": [
+    "codemirror",
+    "ember"
+  ],
+  "dependencies": {
+    "codemirror": "~4.8.0",
+    "ember": ">= 1.3.0"
+  }
+}

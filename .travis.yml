@@ -1,14 +1,29 @@
+---
+language: node_js
+
+sudo: false
+
 after_success:
-- npm run-script publish-build
+  - npm run-script publish-build
+
 cache:
   directories:
-  - bower_components
-  - node_modules
+    - node_modules
+
+install:
+  - npm install -g bower
+  - npm install
+  - bower install
+
+script:
+  - npm test
+
 env:
   global:
   - secure: aVKWYJZynDgR2gfk0XGgiaBrKN10VH0qnbJz0p9ra2BWGiPplwtI3EYJ3CMA+0wvhkNf7rSz6nVPWVyqvqQn8DjiZvqPhej1nJgMT7PZCwqATN+mp+jJxmfe5wMHGvJUMfC4XFGOh5PtEUdVqRTf51NJPqKYkN+eXJm/bujC2EM=
-language: node_js
+
 notifications:
+  email: false
   slack:
     on_success: change
     on_failure: always

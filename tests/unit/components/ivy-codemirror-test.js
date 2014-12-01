@@ -1,3 +1,7 @@
+/* global CodeMirror */
+import Ember from 'ember';
+import { moduleForComponent, test } from 'ember-qunit';
+
 moduleForComponent('ivy-codemirror');
 
 test('should update value property when CodeMirror changes', function() {
