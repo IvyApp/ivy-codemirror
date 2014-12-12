@@ -41,7 +41,7 @@ var glueTree = pickFiles('.', {
 var jsTree = mergeTrees([addonTree, glueTree, loaderTree, registryTree]);
 
 var es6Tree = compileES6(jsTree, {
-  ignoredModules: ['ember'],
+  ignoredModules: ['codemirror', 'ember'],
   inputFiles: [packageInfo.name + '/**/*.js'],
   legacyFilesToAppend: ['registry.js', 'glue.js'],
   loaderFile: 'loader.js',

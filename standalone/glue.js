@@ -1,6 +1,10 @@
 /* global define, require, window */
 var addonName = 'ivy-codemirror';
 
+define('codemirror', ['exports'], function(__exports__) {
+  __exports__['default'] = window.CodeMirror;
+});
+
 define('ember', ['exports'], function(__exports__) {
   __exports__['default'] = window.Ember;
 });
