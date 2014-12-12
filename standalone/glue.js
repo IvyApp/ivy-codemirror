@@ -8,7 +8,7 @@ define('ember', ['exports'], function(__exports__) {
 var index = addonName + '/index';
 define(addonName, ['exports'], function(__exports__) {
   var library = require(index);
-  Object.keys(lf).forEach(function(key) {
+  Object.keys(library).forEach(function(key) {
     __exports__[key] = library[key];
   });
 });
