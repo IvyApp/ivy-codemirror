@@ -11,6 +11,7 @@ As an [ember-cli](http://www.ember-cli.com/) addon:
 
 ```sh
 npm install --save-dev ivy-codemirror
+ember generate ivy-codemirror
 ```
 
 Or if you aren't using ember-cli, you can use this library as a standalone

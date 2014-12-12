@@ -14,6 +14,7 @@
     "ember-qunit-notifications": "0.0.4",
     "qunit": "~1.15.0",
     "codemirror": "~4.8.0",
-    "bootstrap": "~3.3.1"
+    "bootstrap": "~3.3.1",
+    "ember-cli-codemirror-shim": "~0.0.1"
   }
 }

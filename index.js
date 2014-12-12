@@ -1,3 +1,4 @@
+/* jshint node:true */
 'use strict';
 
 module.exports = {
@@ -17,6 +18,10 @@ module.exports = {
 
     themes.forEach(function(theme) {
       app.import(app.bowerDirectory + '/codemirror/theme/' + theme + '.css');
+    });
+
+    app.import(app.bowerDirectory + '/ember-cli-codemirror-shim/codemirror-shim.js', {
+      exports: { 'codemirror': ['default'] }
     });
   }
 };
