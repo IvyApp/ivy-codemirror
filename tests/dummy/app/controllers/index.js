@@ -1,13 +1,15 @@
 import Ember from 'ember';
+import config from '../config/environment';
 
 export default Ember.Controller.extend({
-  lineNumbers: false,
+  lineNumbers: true,
   lineWrapping: false,
   mode: 'javascript',
   readOnly: false,
   smartIndent: true,
   tabSize: 4,
-  theme: '3024-day',
+  theme: 'ambiance',
+  value: config.APP.codeSample,
 
   modes: Ember.A([
     'apl', 'asterisk', 'clike', 'clojure', 'cobol', 'coffeescript',
