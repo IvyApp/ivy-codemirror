@@ -2,53 +2,25 @@
 
 [![Build Status](https://travis-ci.org/IvyApp/ivy-codemirror.svg?branch=master)](https://travis-ci.org/IvyApp/ivy-codemirror)
 
-An [Ember][1] component for the excellent [CodeMirror][2] editor.
+An [Ember](http://emberjs.com) component for the excellent
+[CodeMirror](http://codemirror.net) editor.
 
 ## Installation
 
-```sh
-$ npm install ivy-codemirror
-```
-
-or...
+As an [ember-cli](http://www.ember-cli.com/) addon:
 
 ```sh
-$ bower install ivy-codemirror
+npm install --save-dev ivy-codemirror
 ```
 
-Then include the script(s) into your application.
+Or if you aren't using ember-cli, you can use this library as a standalone
+[Bower](http://bower.io/) package:
 
-### npm + browserify
-
-```js
-require('ivy-codemirror');
+```sh
+bower install --save ivy-codemirror
 ```
 
-### amd
-
-Register `ivy-codemirror` as a [package][3], then:
-
-```js
-define(['ivy-codemirror'], ...)
-```
-
-### named-amd
-
-You ought to know what you're doing if this is the case.
-
-### globals
-
-```html
-<script src="bower_components/ivy-codemirror/dist/globals/main.js"></script>
-```
-
-You'll also need to install the initializer to make the `ivy-codemirror`
-component available in your templates:
-
-```js
-App = Ember.Application.create(/* ... */);
-App.initializer(ivy.codemirror.initializer);
-```
+...and then add the `ivy-codemirror.js` script to your page.
 
 ## Usage
 
@@ -56,7 +28,9 @@ App.initializer(ivy.codemirror.initializer);
 {{ivy-codemirror value=myCode}}
 ```
 
-There are also a handful of [CodeMirror options][4] you can bind to as well:
+There are also a handful of
+[CodeMirror options](http://codemirror.net/doc/manual.html#config) you can bind
+to as well:
 
   * `autofocus`
   * `coverGutterNextToScrollbar`
@@ -82,21 +56,19 @@ There are also a handful of [CodeMirror options][4] you can bind to as well:
 
 ## Contributing
 
-```sh
-$ git clone # <this repo>
-$ npm install
-$ npm test
-
-# during dev
-$ broccoli serve
-# new tab
-$ testem
-```
-
 Fork this repo, make a new branch, and send a pull request. Make sure your
 change is tested or it won't be merged.
 
-[1]: http://emberjs.com
-[2]: http://codemirror.net
-[3]: http://requirejs.org/docs/api.html#packages
-[4]: http://codemirror.net/doc/manual.html#config
+To run tests:
+
+```sh
+git clone # <this repo>
+npm install
+npm test
+```
+
+Or, to start a test server that continually runs (for development):
+
+```sh
+ember test --server
+```
