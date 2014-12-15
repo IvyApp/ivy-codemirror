@@ -1,6 +1,6 @@
 {
   "name": "ivy-codemirror",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Ember component for CodeMirror.",
   "directories": {
     "doc": "doc",
