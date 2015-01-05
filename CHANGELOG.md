@@ -2,6 +2,8 @@
 
 ## master
 
+## 1.0.0-beta.1
+
 * Fix initializer error. This was caused by changing the initializer from
   a named export to the default export.
 * Upgrade to ember-cli 0.1.5.
