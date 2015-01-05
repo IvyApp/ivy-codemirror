@@ -45,7 +45,7 @@ var es6Tree = compileES6(jsTree, {
   inputFiles: [packageInfo.name + '/**/*.js'],
   legacyFilesToAppend: ['registry.js', 'glue.js'],
   loaderFile: 'loader.js',
-  outputFile: '/' + packageInfo.name + '-' + packageInfo.version + '.js',
+  outputFile: '/' + packageInfo.name + '.js',
   wrapInEval: false
 });
 es6Tree = es3Safe(es6Tree);
