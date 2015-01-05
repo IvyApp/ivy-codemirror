@@ -5,7 +5,7 @@
     "Dray Lacy"
   ],
   "description": "Ember component for CodeMirror.",
-  "main": "./ivy-codemirror-VERSION_STRING_PLACEHOLDER.js",
+  "main": "./ivy-codemirror.js",
   "keywords": [
     "codemirror",
     "ember"

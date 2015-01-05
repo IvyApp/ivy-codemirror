@@ -2,6 +2,8 @@
 
 ## master
 
+* Fix incorrect main script in standalone bower.json.
+
 ## 1.0.0-beta.1
 
 * Fix initializer error. This was caused by changing the initializer from
