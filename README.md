@@ -55,6 +55,25 @@ to as well:
   * `theme`
   * `undoDepth`
 
+### Themes / Modes
+
+By default, only `codemirror.css` (CodeMirror's default theme) is included. To
+include more themes and modes, add `codemirror` options to `Brocfile.js` inside
+your app:
+
+```js
+var app = new EmberApp({
+  codemirror: {
+    modes: ['javascript'],
+    themes: ['solarized']
+  }
+});
+```
+
+The above example would pull in `mode/javascript/javascript.js` and
+`theme/solarized.css` from CodeMirror and add them to `vendor.js` and
+`vendor.css`, respectively.
+
 ## Contributing
 
 Fork this repo, make a new branch, and send a pull request. Make sure your
