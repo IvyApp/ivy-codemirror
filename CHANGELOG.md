@@ -1,10 +1,6 @@
 # ivy-codemirror
 
-## master
-
-* Fix incorrect main script in standalone bower.json.
-
-## 1.0.0-beta.1
+## 1.0.0
 
 * Fix initializer error. This was caused by changing the initializer from
   a named export to the default export.
@@ -12,6 +8,7 @@
 * Upgrade to ember 1.9.1 in dummy app.
 * Remove unnecessary ember-data dependency in dummy app.
 * Remove version suffix from ivy-codemirror.js.
+* Fix incorrect main script in standalone bower.json.
 
 ## 0.2.0
 
