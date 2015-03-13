@@ -1,4 +1,4 @@
-/* global CodeMirror */
+import CodeMirror from 'codemirror';
 import Ember from 'ember';
 import { moduleForComponent, test } from 'ember-qunit';
 
