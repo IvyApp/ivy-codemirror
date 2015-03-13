@@ -4,7 +4,7 @@ import { moduleForComponent, test } from 'ember-qunit';
 
 moduleForComponent('ivy-codemirror');
 
-test('should update value property when CodeMirror changes', function() {
+test('should update value property when CodeMirror changes', function(assert) {
   var component = this.subject();
   this.append();
 
@@ -15,41 +15,43 @@ test('should update value property when CodeMirror changes', function() {
     CodeMirror.signal(codeMirror, 'change', codeMirror);
   });
 
-  equal(component.get('value'), '1 + 1', 'value is updated');
+  assert.equal(component.get('value'), '1 + 1', 'value is updated');
 });
 
-test('should update CodeMirror value when value property is changed', function() {
+test('should update CodeMirror value when value property is changed', function(assert) {
   var component = this.subject();
   this.append();
 
   var codeMirror = component.get('codeMirror');
-  equal(codeMirror.getValue(), '', 'precond - value is empty');
+  assert.equal(codeMirror.getValue(), '', 'precond - value is empty');
 
   Ember.run(function() {
     component.set('value', '1 + 1');
   });
 
-  equal(codeMirror.getValue(), '1 + 1', 'value is updated');
+  assert.equal(codeMirror.getValue(), '1 + 1', 'value is updated');
 });
 
 function optionTest(key, beforeValue, afterValue) {
-  test('should update CodeMirror ' + key + ' option when ' + key + ' property changes', function() {
+  test('should update CodeMirror ' + key + ' option when ' + key + ' property changes', function(assert) {
     var component = this.subject();
     this.append();
 
     var codeMirror = component.get('codeMirror');
-    equal(codeMirror.getOption(key), beforeValue,
-          'precond - initial value of ' + key + ' option is correct');
+    assert.equal(
+      codeMirror.getOption(key), beforeValue,
+      'precond - initial value of ' + key + ' option is correct');
 
     Ember.run(function() {
       component.set(key, afterValue);
     });
 
-    equal(codeMirror.getOption(key), afterValue,
-          key + ' option is updated after ' + key + ' property is changed');
+    assert.equal(
+      codeMirror.getOption(key), afterValue,
+      key + ' option is updated after ' + key + ' property is changed');
   });
 
-  test('should update CodeMirror ' + key + ' option when bound to a property whose dependencies change', function() {
+  test('should update CodeMirror ' + key + ' option when bound to a property whose dependencies change', function(assert) {
     var context = Ember.Object.createWithMixins({
       actualValue: beforeValue,
       computedValue: Ember.computed.readOnly('actualValue')
@@ -61,15 +63,17 @@ function optionTest(key, beforeValue, afterValue) {
     this.append();
 
     var codeMirror = component.get('codeMirror');
-    equal(codeMirror.getOption(key), beforeValue,
-          'precond - initial value of ' + key + ' option is correct');
+    assert.equal(
+      codeMirror.getOption(key), beforeValue,
+      'precond - initial value of ' + key + ' option is correct');
 
     Ember.run(function() {
       context.set('actualValue', afterValue);
     });
 
-    equal(codeMirror.getOption(key), afterValue,
-          key + ' option is updated after ' + key + ' property is changed');
+    assert.equal(
+      codeMirror.getOption(key), afterValue,
+      key + ' option is updated after ' + key + ' property is changed');
   });
 }
 
@@ -95,7 +99,7 @@ optionTest('tabindex', null, 1);
 optionTest('theme', 'default', 'twilight');
 optionTest('undoDepth', 200, 100);
 
-test('should refresh when isVisible becomes true', function() {
+test('should refresh when isVisible becomes true', function(assert) {
   var component = this.subject();
   this.append();
 
@@ -109,10 +113,10 @@ test('should refresh when isVisible becomes true', function() {
   Ember.run(function() {
     component.set('isVisible', false);
   });
-  equal(refreshCalls, 0);
+  assert.equal(refreshCalls, 0);
 
   Ember.run(function() {
     component.set('isVisible', true);
   });
-  equal(refreshCalls, 1);
+  assert.equal(refreshCalls, 1);
 });
