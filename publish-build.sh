@@ -34,10 +34,10 @@ esac
 echo -e "CHANNEL: ${CHANNEL}\n"
 
 # Sending output to /dev/null to prevent GH_TOKEN leak on error.
-git clone --branch ${CHANNEL} https://${USER}:${GH_TOKEN}@github.com/${COMPONENTS_REPO_SLUG}.git bower_ivy_tabs &> /dev/null
-rm -rf bower_ivy_tabs/*
-cp -R dist/* bower_ivy_tabs/
-cd bower_ivy_tabs
+git clone --branch ${CHANNEL} https://${USER}:${GH_TOKEN}@github.com/${COMPONENTS_REPO_SLUG}.git bower_ivy_codemirror &> /dev/null
+rm -rf bower_ivy_codemirror/*
+cp -R dist/* bower_ivy_codemirror/
+cd bower_ivy_codemirror
 git remote rm origin
 
 # Sending output to /dev/null to prevent GH_TOKEN leak on error.

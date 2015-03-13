@@ -21,6 +21,7 @@
   "devDependencies": {
     "broccoli": "^0.13.3",
     "broccoli-asset-rev": "^2.0.0",
+    "broccoli-cli": "0.0.1",
     "broccoli-ember-auto-register": "^0.2.0",
     "broccoli-es3-safe-recast": "^1.0.0",
     "broccoli-es6-concatenator": "^0.1.11",
