@@ -6,7 +6,7 @@ moduleForComponent('ivy-codemirror');
 
 test('should update value property when CodeMirror changes', function(assert) {
   var component = this.subject();
-  this.append();
+  this.render();
 
   var codeMirror = component.get('codeMirror');
 
@@ -20,7 +20,7 @@ test('should update value property when CodeMirror changes', function(assert) {
 
 test('should update CodeMirror value when value property is changed', function(assert) {
   var component = this.subject();
-  this.append();
+  this.render();
 
   var codeMirror = component.get('codeMirror');
   assert.equal(codeMirror.getValue(), '', 'precond - value is empty');
@@ -35,7 +35,7 @@ test('should update CodeMirror value when value property is changed', function(a
 function optionTest(key, beforeValue, afterValue) {
   test('should update CodeMirror ' + key + ' option when ' + key + ' property changes', function(assert) {
     var component = this.subject();
-    this.append();
+    this.render();
 
     var codeMirror = component.get('codeMirror');
     assert.equal(
@@ -60,7 +60,7 @@ function optionTest(key, beforeValue, afterValue) {
     var componentOptions = { foo: context };
     componentOptions[key + 'Binding'] = 'foo.computedValue';
     var component = this.subject(componentOptions);
-    this.append();
+    this.render();
 
     var codeMirror = component.get('codeMirror');
     assert.equal(
@@ -101,7 +101,7 @@ optionTest('undoDepth', 200, 100);
 
 test('should refresh when isVisible becomes true', function(assert) {
   var component = this.subject();
-  this.append();
+  this.render();
 
   var codeMirror = component.get('codeMirror'),
       refreshCalls = 0;
