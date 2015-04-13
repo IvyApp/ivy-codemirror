@@ -19,7 +19,6 @@
   "author": "",
   "license": "MIT",
   "devDependencies": {
-    "broccoli": "^0.13.6",
     "broccoli-asset-rev": "^2.0.2",
     "broccoli-ember-auto-register": "^0.2.0",
     "broccoli-es3-safe-recast": "^1.0.0",
