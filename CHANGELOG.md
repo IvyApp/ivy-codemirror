@@ -1,5 +1,9 @@
 # ivy-codemirror
 
+## 1.1.0
+
+* Upgrade to ember-cli 0.2.3.
+
 ## 1.0.0
 
 * Fix initializer error. This was caused by changing the initializer from
