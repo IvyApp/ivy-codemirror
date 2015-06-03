@@ -11,6 +11,7 @@ module.exports = {
 
     app.import(app.bowerDirectory + '/codemirror/lib/codemirror.css');
     app.import(app.bowerDirectory + '/codemirror/lib/codemirror.js');
+    app.import(app.bowerDirectory + '/codemirror/addon/mode/simple.js');
 
     modes.forEach(function(mode) {
       app.import(app.bowerDirectory + '/codemirror/mode/' + mode + '/' + mode + '.js');
