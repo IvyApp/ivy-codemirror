@@ -23,8 +23,10 @@ module.exports = {
       app.import(app.bowerDirectory + '/codemirror/theme/' + theme + '.css');
     });
 
-    app.import(app.bowerDirectory + '/ember-cli-codemirror-shim/codemirror-shim.js', {
-      exports: { 'codemirror': ['default'] }
+    app.import('vendor/ivy-codemirror/shims.js', {
+      exports: {
+        'codemirror': ['default']
+      }
     });
   }
 };
