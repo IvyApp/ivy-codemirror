@@ -2,7 +2,9 @@ import CodeMirror from 'codemirror';
 import Ember from 'ember';
 import { moduleForComponent, test } from 'ember-qunit';
 
-moduleForComponent('ivy-codemirror');
+moduleForComponent('ivy-codemirror', {
+  unit: true
+});
 
 test('should update value property when CodeMirror changes', function(assert) {
   var component = this.subject();
