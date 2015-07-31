@@ -7,6 +7,7 @@ module.exports = {
   included: function(app) {
     var options = app.options.codemirror || {};
     var modes = options.modes || [];
+    var keyMaps = options.keyMaps || [];
     var themes = options.themes || [];
 
     app.import(app.bowerDirectory + '/codemirror/lib/codemirror.css');
@@ -14,6 +15,10 @@ module.exports = {
 
     modes.forEach(function(mode) {
       app.import(app.bowerDirectory + '/codemirror/mode/' + mode + '/' + mode + '.js');
+    });
+
+    keyMaps.forEach(function(keyMap) {
+      app.import(app.bowerDirectory + '/codemirror/keymap/' + keyMap + '.js');
     });
 
     themes.forEach(function(theme) {

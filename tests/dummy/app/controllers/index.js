@@ -5,6 +5,7 @@ export default Ember.Controller.extend({
   lineNumbers: true,
   lineWrapping: false,
   mode: 'javascript',
+  keyMap: 'basic',
   readOnly: false,
   smartIndent: true,
   tabSize: 4,
@@ -25,6 +26,8 @@ export default Ember.Controller.extend({
     'toml', 'tornado', 'turtle', 'vb', 'vbscript', 'velocity', 'verilog',
     'xml', 'xquery', 'yaml', 'z80'
   ]),
+
+  keyMaps: Ember.A(['basic', 'emacs', 'sublime', 'vim']),
 
   themes: Ember.A([
     '3024-day', '3024-night', 'ambiance-mobile', 'ambiance', 'base16-dark',
