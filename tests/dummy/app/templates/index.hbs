@@ -2,13 +2,26 @@
 
 <div class="row">
   <div class="col-sm-9">
-    {{ivy-codemirror lineNumbers=lineNumbers lineWrapping=lineWrapping mode=mode readOnly=readOnly smartIndent=smartIndent theme=theme value=value}}
+    {{ivy-codemirror
+      lineNumbers=lineNumbers
+      lineWrapping=lineWrapping
+      mode=mode
+      keyMap=keyMap
+      readOnly=readOnly
+      smartIndent=smartIndent
+      theme=theme
+      value=value}}
   </div>
 
   <div class="col-sm-3">
     <div class="form-group">
       <label class="control-label" for="mode">Mode</label>
       {{view "select" class="form-control" content=modes id="mode" value=mode}}
+    </div>
+
+    <div class="form-group">
+      <label class="control-label" for="key-map">Key map</label>
+      {{view "select" class="form-control" content=keyMaps id="key-map" value=keyMap}}
     </div>
 
     <div class="form-group">

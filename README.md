@@ -58,21 +58,22 @@ to as well:
 ### Themes / Modes
 
 By default, only `codemirror.css` (CodeMirror's default theme) is included. To
-include more themes and modes, add `codemirror` options to `Brocfile.js` inside
+include more themes, modes, and key maps, add `codemirror` options to `Brocfile.js` inside
 your app:
 
 ```js
 var app = new EmberApp({
   codemirror: {
     modes: ['javascript'],
+    keyMaps: ['vim'],
     themes: ['solarized']
   }
 });
 ```
 
-The above example would pull in `mode/javascript/javascript.js` and
-`theme/solarized.css` from CodeMirror and add them to `vendor.js` and
-`vendor.css`, respectively.
+The above example would pull in `mode/javascript/javascript.js`,
+`keymap/vim.js`, `theme/solarized.css` from CodeMirror and add them to
+`vendor.js` and `vendor.css`, respectively.
 
 ## Contributing
 
