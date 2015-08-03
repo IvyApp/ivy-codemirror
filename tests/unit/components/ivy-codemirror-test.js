@@ -2,7 +2,9 @@ import CodeMirror from 'codemirror';
 import Ember from 'ember';
 import { moduleForComponent, test } from 'ember-qunit';
 
-moduleForComponent('ivy-codemirror');
+moduleForComponent('ivy-codemirror', {
+  unit: true
+});
 
 test('should update value property when CodeMirror changes', function(assert) {
   var component = this.subject();
@@ -16,6 +18,27 @@ test('should update value property when CodeMirror changes', function(assert) {
   });
 
   assert.equal(component.get('value'), '1 + 1', 'value is updated');
+});
+
+test('should send valueUpdated action when CodeMirror changes', function(assert) {
+  var targetObject = Ember.Object.extend({
+    called: false,
+    valueUpdated: function() {
+      this.set('called', true);
+    }
+  }).create();
+
+  var component = this.subject({ targetObject: targetObject, valueUpdated: "valueUpdated" });
+  this.render();
+
+  var codeMirror = component.get('codeMirror');
+
+  Ember.run(function() {
+    codeMirror.setValue('1 + 1');
+    CodeMirror.signal(codeMirror, 'change', codeMirror);
+  });
+
+  assert.ok(targetObject.get('called'), 'valueUpdated action was sent');
 });
 
 test('should update CodeMirror value when value property is changed', function(assert) {
@@ -52,9 +75,10 @@ function optionTest(key, beforeValue, afterValue) {
   });
 
   test('should update CodeMirror ' + key + ' option when bound to a property whose dependencies change', function(assert) {
-    var context = Ember.Object.createWithMixins({
-      actualValue: beforeValue,
+    var context = Ember.Object.extend({
       computedValue: Ember.computed.readOnly('actualValue')
+    }).create({
+      actualValue: beforeValue
     });
 
     var componentOptions = { foo: context };

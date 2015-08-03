@@ -1,5 +1,12 @@
 # ivy-codemirror
 
+## 1.2.0
+
+* [#8](https://github.com/IvyApp/ivy-codemirror/pull/8) Send valueUpdated action on update of value from input.
+* [#7](https://github.com/IvyApp/ivy-codemirror/pull/7) Allow additional key maps to be imported.
+* [#5](https://github.com/IvyApp/ivy-codemirror/pull/5) Update codemirror & support Handlebars.
+* Upgrade to ember-cli 1.13.6.
+
 ## 1.1.0
 
 * Upgrade to ember-cli 0.2.3.
