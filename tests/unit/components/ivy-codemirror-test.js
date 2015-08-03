@@ -54,9 +54,10 @@ function optionTest(key, beforeValue, afterValue) {
   });
 
   test('should update CodeMirror ' + key + ' option when bound to a property whose dependencies change', function(assert) {
-    var context = Ember.Object.createWithMixins({
-      actualValue: beforeValue,
+    var context = Ember.Object.extend({
       computedValue: Ember.computed.readOnly('actualValue')
+    }).create({
+      actualValue: beforeValue
     });
 
     var componentOptions = { foo: context };
