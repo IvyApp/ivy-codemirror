@@ -142,7 +142,9 @@ export default Ember.Component.extend({
    * @method _updateValue
    */
   _updateValue: function(instance) {
-    this.set('value', instance.getValue());
+    var value = instance.getValue();
+    this.set('value', value);
+    this.sendAction('valueUpdated', value);
   },
 
   _valueDidChange: function() {

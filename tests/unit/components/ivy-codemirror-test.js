@@ -20,6 +20,27 @@ test('should update value property when CodeMirror changes', function(assert) {
   assert.equal(component.get('value'), '1 + 1', 'value is updated');
 });
 
+test('should send valueUpdated action when CodeMirror changes', function(assert) {
+  var targetObject = Ember.Object.extend({
+    called: false,
+    valueUpdated: function() {
+      this.set('called', true);
+    }
+  }).create();
+
+  var component = this.subject({ targetObject: targetObject, valueUpdated: "valueUpdated" });
+  this.render();
+
+  var codeMirror = component.get('codeMirror');
+
+  Ember.run(function() {
+    codeMirror.setValue('1 + 1');
+    CodeMirror.signal(codeMirror, 'change', codeMirror);
+  });
+
+  assert.ok(targetObject.get('called'), 'valueUpdated action was sent');
+});
+
 test('should update CodeMirror value when value property is changed', function(assert) {
   var component = this.subject();
   this.render();
