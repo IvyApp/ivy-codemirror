@@ -16,17 +16,29 @@
   <div class="col-sm-3">
     <div class="form-group">
       <label class="control-label" for="mode">Mode</label>
-      {{view "select" class="form-control" content=modes id="mode" value=mode}}
+      <select class="form-control" id="mode" onchange={{action (mut mode) value="target.value"}}>
+        {{#each modes as |modeChoice|}}
+          <option selected={{eq mode modeChoice}} value="{{modeChoice}}">{{modeChoice}}</option>
+        {{/each}}
+      </select>
     </div>
 
     <div class="form-group">
       <label class="control-label" for="key-map">Key map</label>
-      {{view "select" class="form-control" content=keyMaps id="key-map" value=keyMap}}
+      <select class="form-control" id="key-map" onchange={{action (mut keyMap) value="target.value"}}>
+        {{#each keyMaps as |keyMapChoice|}}
+          <option selected={{eq keyMap keyMapChoice}} value="{{keyMapChoice}}">{{keyMapChoice}}</option>
+        {{/each}}
+      </select>
     </div>
 
     <div class="form-group">
       <label class="control-label" for="theme">Theme</label>
-      {{view "select" class="form-control" content=themes id="theme" value=theme}}
+      <select class="form-control" id="theme" onchange={{action (mut theme) value="target.value"}}>
+        {{#each themes as |themeChoice|}}
+          <option selected={{eq theme themeChoice}} value="{{themeChoice}}">{{themeChoice}}</option>
+        {{/each}}
+      </select>
     </div>
 
     <div class="checkbox">
