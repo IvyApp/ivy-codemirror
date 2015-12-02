@@ -7,21 +7,9 @@ An [Ember](http://emberjs.com) component for the excellent
 
 ## Installation
 
-As an [ember-cli](http://www.ember-cli.com/) addon:
-
 ```sh
-npm install --save-dev ivy-codemirror
-ember generate ivy-codemirror
+ember install ivy-codemirror # install:addon for Ember CLI < 0.2.3
 ```
-
-Or if you aren't using ember-cli, you can use this library as a standalone
-[Bower](http://bower.io/) package:
-
-```sh
-bower install --save ivy-codemirror
-```
-
-...and then add the `ivy-codemirror.js` script to your page.
 
 ## Usage
 

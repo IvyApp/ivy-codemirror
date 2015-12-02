@@ -5,21 +5,15 @@ node_js:
 
 sudo: false
 
-after_success:
-  - npm run-script publish-build
-
 cache:
   directories:
     - node_modules
 
 env:
-  global:
-    - secure: aVKWYJZynDgR2gfk0XGgiaBrKN10VH0qnbJz0p9ra2BWGiPplwtI3EYJ3CMA+0wvhkNf7rSz6nVPWVyqvqQn8DjiZvqPhej1nJgMT7PZCwqATN+mp+jJxmfe5wMHGvJUMfC4XFGOh5PtEUdVqRTf51NJPqKYkN+eXJm/bujC2EM=
-  matrix:
-    - EMBER_TRY_SCENARIO=default
-    - EMBER_TRY_SCENARIO=ember-release
-    - EMBER_TRY_SCENARIO=ember-beta
-    - EMBER_TRY_SCENARIO=ember-canary
+  - EMBER_TRY_SCENARIO=default
+  - EMBER_TRY_SCENARIO=ember-release
+  - EMBER_TRY_SCENARIO=ember-beta
+  - EMBER_TRY_SCENARIO=ember-canary
 
 matrix:
   fast_finish: true

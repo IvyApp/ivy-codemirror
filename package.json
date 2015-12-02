@@ -7,7 +7,6 @@
     "test": "tests"
   },
   "scripts": {
-    "publish-build": "./publish-build.sh",
     "start": "ember server",
     "build": "ember build",
     "test": "ember try:testall"
@@ -20,12 +19,6 @@
   "license": "MIT",
   "devDependencies": {
     "broccoli-asset-rev": "^2.0.2",
-    "broccoli-ember-auto-register": "^0.2.0",
-    "broccoli-es3-safe-recast": "^1.0.0",
-    "broccoli-es6-concatenator": "^0.1.11",
-    "broccoli-iife": "^0.1.0",
-    "broccoli-merge-trees": "^0.2.2",
-    "broccoli-replace": "^0.2.0",
     "broccoli-static-compiler": "^0.2.1",
     "ember-cli": "1.13.6",
     "ember-cli-app-version": "0.4.0",
