@@ -1,6 +1,6 @@
 /* global require, module */
 var EmberApp = require('ember-cli/lib/broccoli/ember-addon');
-var pickFiles = require('broccoli-static-compiler');
+var path = require('path');
 
 module.exports = function(defaults) {
   var app = new EmberApp(defaults, {
@@ -154,10 +154,7 @@ module.exports = function(defaults) {
     behave. You most likely want to be modifying `./index.js` or app's build file
   */
 
-  var bootstrapTree = pickFiles(app.bowerDirectory + '/bootstrap/dist', {
-    destDir: '/assets',
-    srcDir: '/'
-  });
+  app.import(path.join(app.bowerDirectory, 'bootstrap/dist/css/bootstrap.min.css'));
 
-  return app.toTree([bootstrapTree]);
+  return app.toTree();
 };
