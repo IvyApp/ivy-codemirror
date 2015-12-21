@@ -1,5 +1,9 @@
 # ivy-codemirror
 
+## 1.3.0
+
+* [#12](https://github.com/IvyApp/ivy-codemirror/pull/8) Pass all event params to valueUpdated.
+
 ## 1.2.0
 
 * [#8](https://github.com/IvyApp/ivy-codemirror/pull/8) Send valueUpdated action on update of value from input.
