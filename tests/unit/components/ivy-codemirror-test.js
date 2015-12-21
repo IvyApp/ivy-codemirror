@@ -21,10 +21,14 @@ test('should update value property when CodeMirror changes', function(assert) {
 });
 
 test('should send valueUpdated action when CodeMirror changes', function(assert) {
+  assert.expect(3);
+
   var targetObject = Ember.Object.extend({
     called: false,
-    valueUpdated: function() {
-      this.set('called', true);
+    valueUpdated: function(value, instance) {
+      assert.equal(value, '1 + 1', 'value is passed to valueUpdated');
+      assert.ok(instance instanceof CodeMirror, '1 + 1', 'CodeMirror editor instance is passed to valueUpdated');
+      assert.equal(arguments.length, 3, '3 arguments are passed to valueUpdated');
     }
   }).create();
 
@@ -34,11 +38,8 @@ test('should send valueUpdated action when CodeMirror changes', function(assert)
   var codeMirror = component.get('codeMirror');
 
   Ember.run(function() {
-    codeMirror.setValue('1 + 1');
-    CodeMirror.signal(codeMirror, 'change', codeMirror);
+    codeMirror.setValue('1 + 1'); // this triggers a change event
   });
-
-  assert.ok(targetObject.get('called'), 'valueUpdated action was sent');
 });
 
 test('should update CodeMirror value when value property is changed', function(assert) {
