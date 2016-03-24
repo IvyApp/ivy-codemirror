@@ -25,7 +25,7 @@ test('should send valueUpdated action when CodeMirror changes', function(assert)
 
   var targetObject = Ember.Object.extend({
     called: false,
-    valueUpdated: function(value, instance) {
+    valueUpdated(value, instance) {
       assert.equal(value, '1 + 1', 'value is passed to valueUpdated');
       assert.ok(instance instanceof CodeMirror, '1 + 1', 'CodeMirror editor instance is passed to valueUpdated');
       assert.equal(arguments.length, 3, '3 arguments are passed to valueUpdated');

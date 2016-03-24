@@ -40,7 +40,7 @@ export default Ember.Component.extend({
    *
    * @method refresh
    */
-  refresh: function() {
+  refresh() {
     this.get('codeMirror').refresh();
   },
 
@@ -90,7 +90,7 @@ export default Ember.Component.extend({
    * @private
    * @method _bindCodeMirrorEvent
    */
-  _bindCodeMirrorEvent: function(event, target, method) {
+  _bindCodeMirrorEvent(event, target, method) {
     var callback = Ember.run.bind(target, method);
 
     this.get('codeMirror').on(event, callback);
@@ -104,7 +104,7 @@ export default Ember.Component.extend({
    * @private
    * @method _bindCodeMirrorProperty
    */
-  _bindCodeMirrorOption: function(key) {
+  _bindCodeMirrorOption(key) {
     this._bindCodeMirrorProperty(key, this, '_optionDidChange');
 
     // Set the initial option synchronously.
@@ -117,7 +117,7 @@ export default Ember.Component.extend({
    * @private
    * @method _bindCodeMirrorProperty
    */
-  _bindCodeMirrorProperty: function(key, target, method) {
+  _bindCodeMirrorProperty(key, target, method) {
     this.addObserver(key, target, method);
 
     this.on('willDestroyElement', this, function() {
@@ -131,7 +131,7 @@ export default Ember.Component.extend({
    * @private
    * @method _optionDidChange
    */
-  _optionDidChange: function(sender, key) {
+  _optionDidChange(sender, key) {
     this.get('codeMirror').setOption(key, this.get(key));
   },
 
@@ -141,13 +141,13 @@ export default Ember.Component.extend({
    * @private
    * @method _updateValue
    */
-  _updateValue: function(instance, changeObj) {
+  _updateValue(instance, changeObj) {
     var value = instance.getValue();
     this.set('value', value);
     this.sendAction('valueUpdated', value, instance, changeObj);
   },
 
-  _valueDidChange: function() {
+  _valueDidChange() {
     var codeMirror = this.get('codeMirror'),
         value = this.get('value');
 
