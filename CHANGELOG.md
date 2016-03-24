@@ -1,5 +1,12 @@
 # ivy-codemirror
 
+## 1.4.0
+
+* Bump CodeMirror version to 5.13.x.
+* Remove `ember-cli-codemirror-shim`.
+* Upgrade `ember-cli` to 2.4.2.
+* Remove standalone builds.
+
 ## 1.3.0
 
 * [#12](https://github.com/IvyApp/ivy-codemirror/pull/8) Pass all event params to valueUpdated.
