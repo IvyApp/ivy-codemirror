@@ -46,7 +46,7 @@ to as well:
 ### Themes / Modes
 
 By default, only `codemirror.css` (CodeMirror's default theme) is included. To
-include more themes, modes, and key maps, add `codemirror` options to `Brocfile.js` inside
+include more themes, modes, and key maps, add `codemirror` options to `ember-cli-build.js` inside
 your app:
 
 ```js
