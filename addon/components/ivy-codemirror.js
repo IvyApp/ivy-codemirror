@@ -45,7 +45,7 @@ export default Ember.Component.extend({
   },
 
   _initCodemirror: Ember.on('didInsertElement', function() {
-    var codeMirror = CodeMirror.fromTextArea(this.get('element'));
+    const codeMirror = CodeMirror.fromTextArea(this.get('element'));
 
     // Stash away the CodeMirror instance.
     this.set('codeMirror', codeMirror);
@@ -91,7 +91,7 @@ export default Ember.Component.extend({
    * @method _bindCodeMirrorEvent
    */
   _bindCodeMirrorEvent(event, target, method) {
-    var callback = Ember.run.bind(target, method);
+    const callback = Ember.run.bind(target, method);
 
     this.get('codeMirror').on(event, callback);
 
@@ -142,13 +142,13 @@ export default Ember.Component.extend({
    * @method _updateValue
    */
   _updateValue(instance, changeObj) {
-    var value = instance.getValue();
+    const value = instance.getValue();
     this.set('value', value);
     this.sendAction('valueUpdated', value, instance, changeObj);
   },
 
   _valueDidChange() {
-    var codeMirror = this.get('codeMirror'),
+    const codeMirror = this.get('codeMirror'),
         value = this.get('value');
 
     if (value !== codeMirror.getValue()) {

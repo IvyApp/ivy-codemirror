@@ -7,10 +7,10 @@ moduleForComponent('ivy-codemirror', {
 });
 
 test('should update value property when CodeMirror changes', function(assert) {
-  var component = this.subject();
+  const component = this.subject();
   this.render();
 
-  var codeMirror = component.get('codeMirror');
+  const codeMirror = component.get('codeMirror');
 
   Ember.run(function() {
     codeMirror.setValue('1 + 1');
@@ -23,7 +23,7 @@ test('should update value property when CodeMirror changes', function(assert) {
 test('should send valueUpdated action when CodeMirror changes', function(assert) {
   assert.expect(3);
 
-  var targetObject = Ember.Object.extend({
+  const targetObject = Ember.Object.extend({
     called: false,
     valueUpdated(value, instance) {
       assert.equal(value, '1 + 1', 'value is passed to valueUpdated');
@@ -32,10 +32,10 @@ test('should send valueUpdated action when CodeMirror changes', function(assert)
     }
   }).create();
 
-  var component = this.subject({ targetObject: targetObject, valueUpdated: "valueUpdated" });
+  const component = this.subject({ targetObject: targetObject, valueUpdated: "valueUpdated" });
   this.render();
 
-  var codeMirror = component.get('codeMirror');
+  const codeMirror = component.get('codeMirror');
 
   Ember.run(function() {
     codeMirror.setValue('1 + 1'); // this triggers a change event
@@ -43,10 +43,10 @@ test('should send valueUpdated action when CodeMirror changes', function(assert)
 });
 
 test('should update CodeMirror value when value property is changed', function(assert) {
-  var component = this.subject();
+  const component = this.subject();
   this.render();
 
-  var codeMirror = component.get('codeMirror');
+  const codeMirror = component.get('codeMirror');
   assert.equal(codeMirror.getValue(), '', 'precond - value is empty');
 
   Ember.run(function() {
@@ -58,10 +58,10 @@ test('should update CodeMirror value when value property is changed', function(a
 
 function optionTest(key, beforeValue, afterValue) {
   test('should update CodeMirror ' + key + ' option when ' + key + ' property changes', function(assert) {
-    var component = this.subject();
+    const component = this.subject();
     this.render();
 
-    var codeMirror = component.get('codeMirror');
+    const codeMirror = component.get('codeMirror');
     assert.equal(
       codeMirror.getOption(key), beforeValue,
       'precond - initial value of ' + key + ' option is correct');
@@ -76,18 +76,18 @@ function optionTest(key, beforeValue, afterValue) {
   });
 
   test('should update CodeMirror ' + key + ' option when bound to a property whose dependencies change', function(assert) {
-    var context = Ember.Object.extend({
+    const context = Ember.Object.extend({
       computedValue: Ember.computed.readOnly('actualValue')
     }).create({
       actualValue: beforeValue
     });
 
-    var componentOptions = { foo: context };
+    const componentOptions = { foo: context };
     componentOptions[key + 'Binding'] = 'foo.computedValue';
-    var component = this.subject(componentOptions);
+    const component = this.subject(componentOptions);
     this.render();
 
-    var codeMirror = component.get('codeMirror');
+    const codeMirror = component.get('codeMirror');
     assert.equal(
       codeMirror.getOption(key), beforeValue,
       'precond - initial value of ' + key + ' option is correct');
@@ -125,11 +125,11 @@ optionTest('theme', 'default', 'twilight');
 optionTest('undoDepth', 200, 100);
 
 test('should refresh when isVisible becomes true', function(assert) {
-  var component = this.subject();
+  const component = this.subject();
   this.render();
 
-  var codeMirror = component.get('codeMirror'),
-      refreshCalls = 0;
+  const codeMirror = component.get('codeMirror');
+  let refreshCalls = 0;
 
   codeMirror.refresh = function() {
     refreshCalls++;
