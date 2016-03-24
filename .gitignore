@@ -2,7 +2,6 @@
 
 # compiled output
 /dist
-/standalone/dist
 /tmp
 
 # dependencies

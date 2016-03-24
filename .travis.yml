@@ -11,6 +11,7 @@ cache:
 
 env:
   - EMBER_TRY_SCENARIO=default
+  - EMBER_TRY_SCENARIO=ember-1-13
   - EMBER_TRY_SCENARIO=ember-release
   - EMBER_TRY_SCENARIO=ember-beta
   - EMBER_TRY_SCENARIO=ember-canary
@@ -26,7 +27,7 @@ before_install:
   - "npm install -g npm@^2"
 
 install:
-  - npm install -g bower broccoli-cli
+  - npm install -g bower
   - npm install
   - bower install
 
