@@ -47,7 +47,6 @@ module.exports = function(defaults) {
         'javascript',
         'jinja2',
         'julia',
-        'kotlin',
         'livescript',
         'lua',
         'markdown',

@@ -2,7 +2,7 @@
   "name": "ivy-codemirror",
   "dependencies": {
     "bootstrap": "~3.3.1",
-    "codemirror": "~5.3.0",
+    "codemirror": "~5.13.0",
     "ember": "~2.4.1",
     "ember-cli-shims": "0.1.0",
     "ember-cli-test-loader": "0.2.2",

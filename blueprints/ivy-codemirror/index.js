@@ -3,7 +3,7 @@
 module.exports = {
   afterInstall: function() {
     return this.addBowerPackagesToProject([
-      { name: 'codemirror', target: '~4.8.0' }
+      { name: 'codemirror', target: '~5.13.0' }
     ]);
   },
 
