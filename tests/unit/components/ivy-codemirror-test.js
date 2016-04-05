@@ -1,59 +1,8 @@
-import CodeMirror from 'codemirror';
 import Ember from 'ember';
 import { moduleForComponent, test } from 'ember-qunit';
 
 moduleForComponent('ivy-codemirror', {
   unit: true
-});
-
-test('should update value property when CodeMirror changes', function(assert) {
-  const component = this.subject();
-  this.render();
-
-  const codeMirror = component.get('codeMirror');
-
-  Ember.run(function() {
-    codeMirror.setValue('1 + 1');
-    CodeMirror.signal(codeMirror, 'change', codeMirror);
-  });
-
-  assert.equal(component.get('value'), '1 + 1', 'value is updated');
-});
-
-test('should send valueUpdated action when CodeMirror changes', function(assert) {
-  assert.expect(3);
-
-  const targetObject = Ember.Object.extend({
-    called: false,
-    valueUpdated(value, instance) {
-      assert.equal(value, '1 + 1', 'value is passed to valueUpdated');
-      assert.ok(instance instanceof CodeMirror, '1 + 1', 'CodeMirror editor instance is passed to valueUpdated');
-      assert.equal(arguments.length, 3, '3 arguments are passed to valueUpdated');
-    }
-  }).create();
-
-  const component = this.subject({ targetObject: targetObject, valueUpdated: "valueUpdated" });
-  this.render();
-
-  const codeMirror = component.get('codeMirror');
-
-  Ember.run(function() {
-    codeMirror.setValue('1 + 1'); // this triggers a change event
-  });
-});
-
-test('should update CodeMirror value when value property is changed', function(assert) {
-  const component = this.subject();
-  this.render();
-
-  const codeMirror = component.get('codeMirror');
-  assert.equal(codeMirror.getValue(), '', 'precond - value is empty');
-
-  Ember.run(function() {
-    component.set('value', '1 + 1');
-  });
-
-  assert.equal(codeMirror.getValue(), '1 + 1', 'value is updated');
 });
 
 function optionTest(key, beforeValue, afterValue) {
@@ -123,25 +72,3 @@ optionTest('tabSize', 4, 2);
 optionTest('tabindex', null, 1);
 optionTest('theme', 'default', 'twilight');
 optionTest('undoDepth', 200, 100);
-
-test('should refresh when isVisible becomes true', function(assert) {
-  const component = this.subject();
-  this.render();
-
-  const codeMirror = component.get('codeMirror');
-  let refreshCalls = 0;
-
-  codeMirror.refresh = function() {
-    refreshCalls++;
-  };
-
-  Ember.run(function() {
-    component.set('isVisible', false);
-  });
-  assert.equal(refreshCalls, 0);
-
-  Ember.run(function() {
-    component.set('isVisible', true);
-  });
-  assert.equal(refreshCalls, 1);
-});

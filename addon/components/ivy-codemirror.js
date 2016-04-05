@@ -82,6 +82,9 @@ export default Ember.Component.extend({
     // Force a refresh on `becameVisible`, since CodeMirror won't render itself
     // onto a hidden element.
     this.on('becameVisible', this, 'refresh');
+
+    // Private action used by tests. Do not rely on this in your apps.
+    this.sendAction('_onReady', codeMirror);
   }),
 
   /**
