@@ -12,37 +12,29 @@ An [Ember](http://emberjs.com) component for the excellent
 ember install ivy-codemirror # install:addon for Ember CLI < 0.2.3
 ```
 
+If you are using a version of Ember prior to 2.3, you will also need to install
+the `ember-hash-helper-polyfill` addon:
+
+```sh
+ember install ember-hash-helper-polyfill
+```
+
 ## Usage
 
 ```handlebars
 {{ivy-codemirror value=myCode}}
 ```
 
-There are also a handful of
-[CodeMirror options](http://codemirror.net/doc/manual.html#config) you can bind
-to as well:
+### Options
 
-  * `autofocus`
-  * `coverGutterNextToScrollbar`
-  * `electricChars`
-  * `extraKeys`
-  * `firstLineNumber`
-  * `fixedGutter`
-  * `historyEventDelay`
-  * `indentUnit`
-  * `indentWithTabs`
-  * `keyMap`
-  * `lineNumbers`
-  * `lineWrapping`
-  * `mode`
-  * `readOnly`
-  * `rtlMoveVisually`
-  * `showCursorWhenSelecting`
-  * `smartIndent`
-  * `tabSize`
-  * `tabindex`
-  * `theme`
-  * `undoDepth`
+`ivy-codemirror` also allows passing
+[options](http://codemirror.net/doc/manual.html#config) to CodeMirror via the
+`options` property. The easiest way to do this is via Ember's built-in `hash`
+helper, like so:
+
+```handlebars
+{{ivy-codemirror options=(hash lineNumbers=true mode="javascript")}}
+```
 
 ### Themes / Modes
 

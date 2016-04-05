@@ -41,42 +41,16 @@ export default Ember.Component.extend({
    * @method refresh
    */
   refresh() {
-    this.get('codeMirror').refresh();
+    this._codeMirror.refresh();
   },
 
   didInsertElement() {
     this._super(...arguments);
 
-    const codeMirror = CodeMirror.fromTextArea(this.get('element'));
-
-    // Stash away the CodeMirror instance.
-    this.set('codeMirror', codeMirror);
+    this._codeMirror = CodeMirror.fromTextArea(this.get('element'));
 
     // Set up handlers for CodeMirror events.
     this._bindCodeMirrorEvent('change', this, '_updateValue');
-
-    // Set up bindings for CodeMirror options.
-    this._bindCodeMirrorOption('autofocus');
-    this._bindCodeMirrorOption('coverGutterNextToScrollbar');
-    this._bindCodeMirrorOption('electricChars');
-    this._bindCodeMirrorOption('extraKeys');
-    this._bindCodeMirrorOption('firstLineNumber');
-    this._bindCodeMirrorOption('fixedGutter');
-    this._bindCodeMirrorOption('historyEventDelay');
-    this._bindCodeMirrorOption('indentUnit');
-    this._bindCodeMirrorOption('indentWithTabs');
-    this._bindCodeMirrorOption('keyMap');
-    this._bindCodeMirrorOption('lineNumbers');
-    this._bindCodeMirrorOption('lineWrapping');
-    this._bindCodeMirrorOption('mode');
-    this._bindCodeMirrorOption('readOnly');
-    this._bindCodeMirrorOption('rtlMoveVisually');
-    this._bindCodeMirrorOption('showCursorWhenSelecting');
-    this._bindCodeMirrorOption('smartIndent');
-    this._bindCodeMirrorOption('tabSize');
-    this._bindCodeMirrorOption('tabindex');
-    this._bindCodeMirrorOption('theme');
-    this._bindCodeMirrorOption('undoDepth');
 
     this._bindCodeMirrorProperty('value', this, '_valueDidChange');
     this._valueDidChange();
@@ -86,7 +60,29 @@ export default Ember.Component.extend({
     this.on('becameVisible', this, 'refresh');
 
     // Private action used by tests. Do not rely on this in your apps.
-    this.sendAction('_onReady', codeMirror);
+    this.sendAction('_onReady', this._codeMirror);
+  },
+
+  didRender() {
+    this._super(...arguments);
+
+    this.updateCodeMirrorOptions();
+  },
+
+  updateCodeMirrorOption(option, value) {
+    if (this._codeMirror.getOption(option) !== value) {
+      this._codeMirror.setOption(option, value);
+    }
+  },
+
+  updateCodeMirrorOptions() {
+    const options = this.get('options');
+
+    if (options) {
+      Object.keys(options).forEach(function(option) {
+        this.updateCodeMirrorOption(option, options[option]);
+      }, this);
+    }
   },
 
   /**
@@ -98,22 +94,11 @@ export default Ember.Component.extend({
   _bindCodeMirrorEvent(event, target, method) {
     const callback = Ember.run.bind(target, method);
 
-    this.get('codeMirror').on(event, callback);
+    this._codeMirror.on(event, callback);
 
     this.on('willDestroyElement', this, function() {
-      this.get('codeMirror').off(event, callback);
+      this._codeMirror.off(event, callback);
     });
-  },
-
-  /**
-   * @private
-   * @method _bindCodeMirrorProperty
-   */
-  _bindCodeMirrorOption(key) {
-    this._bindCodeMirrorProperty(key, this, '_optionDidChange');
-
-    // Set the initial option synchronously.
-    this._optionDidChange(this, key);
   },
 
   /**
@@ -131,16 +116,6 @@ export default Ember.Component.extend({
   },
 
   /**
-   * Sync a local option value with CodeMirror.
-   *
-   * @private
-   * @method _optionDidChange
-   */
-  _optionDidChange(sender, key) {
-    this.get('codeMirror').setOption(key, this.get(key));
-  },
-
-  /**
    * Update the `value` property when a CodeMirror `change` event occurs.
    *
    * @private
@@ -153,11 +128,10 @@ export default Ember.Component.extend({
   },
 
   _valueDidChange() {
-    const codeMirror = this.get('codeMirror'),
-        value = this.get('value');
+    const value = this.get('value');
 
-    if (value !== codeMirror.getValue()) {
-      codeMirror.setValue(value || '');
+    if (value !== this._codeMirror.getValue()) {
+      this._codeMirror.setValue(value || '');
     }
   }
 });

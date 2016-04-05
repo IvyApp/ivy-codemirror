@@ -49,3 +49,15 @@ test('it refreshes when isVisible becomes true', function(assert) {
   this.set('isVisible', true);
   assert.equal(refreshCalls, 1);
 });
+
+test('it sets options on the CodeMirror editor', function(assert) {
+  this.render(hbs`{{ivy-codemirror _onReady=(action (mut codeMirror)) options=(hash lineNumbers=lineNumbers)}}`);
+
+  const codeMirror = this.get('codeMirror');
+
+  this.set('lineNumbers', true);
+  assert.equal(codeMirror.getOption('lineNumbers'), true);
+
+  this.set('lineNumbers', false);
+  assert.equal(codeMirror.getOption('lineNumbers'), false);
+});
