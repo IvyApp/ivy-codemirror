@@ -44,7 +44,9 @@ export default Ember.Component.extend({
     this.get('codeMirror').refresh();
   },
 
-  _initCodemirror: Ember.on('didInsertElement', function() {
+  didInsertElement() {
+    this._super(...arguments);
+
     const codeMirror = CodeMirror.fromTextArea(this.get('element'));
 
     // Stash away the CodeMirror instance.
@@ -85,7 +87,7 @@ export default Ember.Component.extend({
 
     // Private action used by tests. Do not rely on this in your apps.
     this.sendAction('_onReady', codeMirror);
-  }),
+  },
 
   /**
    * Bind a handler for `event`, to be torn down in `willDestroyElement`.
