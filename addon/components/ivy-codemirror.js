@@ -29,9 +29,6 @@ export default Ember.Component.extend({
     // Set up handlers for CodeMirror events.
     this._bindCodeMirrorEvent('change', this, '_updateValue');
 
-    this._bindCodeMirrorProperty('value', this, '_valueDidChange');
-    this._valueDidChange();
-
     // Private action used by tests. Do not rely on this in your apps.
     this.sendAction('_onReady', this._codeMirror);
   },
@@ -40,6 +37,7 @@ export default Ember.Component.extend({
     this._super(...arguments);
 
     this.updateCodeMirrorOptions();
+    this.updateCodeMirrorValue();
   },
 
   updateCodeMirrorOption(option, value) {
@@ -55,6 +53,14 @@ export default Ember.Component.extend({
       Object.keys(options).forEach(function(option) {
         this.updateCodeMirrorOption(option, options[option]);
       }, this);
+    }
+  },
+
+  updateCodeMirrorValue() {
+    const value = this.get('value');
+
+    if (value !== this._codeMirror.getValue()) {
+      this._codeMirror.setValue(value || '');
     }
   },
 
@@ -82,20 +88,6 @@ export default Ember.Component.extend({
   },
 
   /**
-   * Bind an observer on `key`, to be torn down in `willDestroyElement`.
-   *
-   * @private
-   * @method _bindCodeMirrorProperty
-   */
-  _bindCodeMirrorProperty(key, target, method) {
-    this.addObserver(key, target, method);
-
-    this.on('willDestroyElement', this, function() {
-      this.removeObserver(key, target, method);
-    });
-  },
-
-  /**
    * Update the `value` property when a CodeMirror `change` event occurs.
    *
    * @private
@@ -105,13 +97,5 @@ export default Ember.Component.extend({
     const value = instance.getValue();
     this.set('value', value);
     this.sendAction('valueUpdated', value, instance, changeObj);
-  },
-
-  _valueDidChange() {
-    const value = this.get('value');
-
-    if (value !== this._codeMirror.getValue()) {
-      this._codeMirror.setValue(value || '');
-    }
   }
 });
