@@ -16,6 +16,11 @@ module.exports = {
         resolutions: {
           'ember': '~1.13.0'
         }
+      },
+      npm: {
+        devDependencies: {
+          'ember-hash-helper-polyfill': '~0.1.0'
+        }
       }
     },
     {
