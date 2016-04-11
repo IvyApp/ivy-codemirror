@@ -58,6 +58,13 @@ export default Ember.Component.extend({
     }
   },
 
+  willDestroyElement() {
+    this._super(...arguments);
+
+    // Remove the editor and restore the original textarea.
+    this._codeMirror.toTextArea();
+  },
+
   /**
    * Bind a handler for `event`, to be torn down in `willDestroyElement`.
    *
