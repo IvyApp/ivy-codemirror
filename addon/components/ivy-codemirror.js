@@ -11,28 +11,6 @@ export default Ember.Component.extend({
    */
   value: null,
 
-  autofocus: false,
-  coverGutterNextToScrollbar: false,
-  electricChars: true,
-  extraKeys: null,
-  firstLineNumber: 1,
-  fixedGutter: true,
-  historyEventDelay: 1250,
-  indentUnit: 2,
-  indentWithTabs: false,
-  keyMap: 'default',
-  lineNumbers: false,
-  lineWrapping: false,
-  mode: null,
-  readOnly: false,
-  rtlMoveVisually: true,
-  showCursorWhenSelecting: false,
-  smartIndent: true,
-  tabSize: 4,
-  tabindex: null,
-  theme: 'default',
-  undoDepth: 200,
-
   tagName: 'textarea',
 
   /**
