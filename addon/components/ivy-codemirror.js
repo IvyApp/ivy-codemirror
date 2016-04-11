@@ -13,12 +13,11 @@ export default Ember.Component.extend({
 
   tagName: 'textarea',
 
-  /**
-   * Force CodeMirror to refresh.
-   *
-   * @method refresh
-   */
-  refresh() {
+  becameVisible() {
+    this._super(...arguments);
+
+    // Force a refresh on `becameVisible`, since CodeMirror won't render itself
+    // onto a hidden element.
     this._codeMirror.refresh();
   },
 
@@ -32,10 +31,6 @@ export default Ember.Component.extend({
 
     this._bindCodeMirrorProperty('value', this, '_valueDidChange');
     this._valueDidChange();
-
-    // Force a refresh on `becameVisible`, since CodeMirror won't render itself
-    // onto a hidden element.
-    this.on('becameVisible', this, 'refresh');
 
     // Private action used by tests. Do not rely on this in your apps.
     this.sendAction('_onReady', this._codeMirror);
