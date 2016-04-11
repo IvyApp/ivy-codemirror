@@ -3,13 +3,15 @@
 <div class="row">
   <div class="col-sm-9">
     {{ivy-codemirror
-      lineNumbers=lineNumbers
-      lineWrapping=lineWrapping
-      mode=mode
-      keyMap=keyMap
-      readOnly=readOnly
-      smartIndent=smartIndent
-      theme=theme
+      options=(hash
+        lineNumbers=lineNumbers
+        lineWrapping=lineWrapping
+        mode=mode
+        keyMap=keyMap
+        readOnly=readOnly
+        smartIndent=smartIndent
+        theme=theme
+      )
       value=value}}
   </div>
 
