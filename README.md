@@ -34,12 +34,12 @@ displayed:
 In the spirit of [Data Down, Actions
 Up](https://dockyard.com/blog/2015/10/14/best-practices-data-down-actions-up),
 the `value` **will not be modified directly**. Instead, when a CodeMirror
-`change` event occurs, an `onChange` action will be sent, and will be given the
-new value as an argument. You might implement this action handler like so:
+`change` event occurs, a `valueUpdated` action will be sent, and will be given
+the new value as an argument. You might implement this action handler like so:
 
 ```handlebars
 <!-- app/templates/index.hbs -->
-{{ivy-codemirror onChange=(action "updateMyCode") value=myCode}}
+{{ivy-codemirror value=myCode valueUpdated=(action "updateMyCode")}}
 ```
 
 ```javascript
@@ -61,7 +61,7 @@ yourself, like so:
 
 ```handlebars
 <!-- app/templates/index.hbs -->
-{{ivy-codemirror onChange=(action (mut myCode)) value=myCode}}
+{{ivy-codemirror value=myCode valueUpdated=(action (mut myCode))}}
 ```
 
 ### Options

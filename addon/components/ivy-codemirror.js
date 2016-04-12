@@ -18,8 +18,8 @@ export default Ember.Component.extend({
 
     this._codeMirror = this.get('codeMirror').fromTextArea(this.get('elementId'), this.get('element'));
 
-    // Fire an "onChange" action when CodeMirror triggers a "change" event.
-    this.setupCodeMirrorEventHandler('change', this, this.sendOnChangeAction);
+    // Send a "valueUpdated" action when CodeMirror triggers a "change" event.
+    this.setupCodeMirrorEventHandler('change', this, this.sendValueUpdatedAction);
   },
 
   didRender() {
@@ -27,10 +27,6 @@ export default Ember.Component.extend({
 
     this.updateCodeMirrorOptions();
     this.updateCodeMirrorValue();
-  },
-
-  sendOnChangeAction(codeMirror) {
-    this.sendAction('onChange', codeMirror.getValue());
   },
 
   setupCodeMirrorEventHandler(event, target, method) {
@@ -41,6 +37,10 @@ export default Ember.Component.extend({
     this.one('willDestroyElement', this, function() {
       this._codeMirror.off(event, callback);
     });
+  },
+
+  sendValueUpdatedAction(codeMirror) {
+    this.sendAction('valueUpdated', codeMirror.getValue());
   },
 
   updateCodeMirrorOption(option, value) {

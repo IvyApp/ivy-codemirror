@@ -20,8 +20,8 @@ test('it uses the `value` property to set the value of the CodeMirror instance',
   assert.equal(instance.getValue(), '2');
 });
 
-test('it sends an "onChange" action when the value of the CodeMirror instance changes', function(assert) {
-  this.render(hbs`{{ivy-codemirror id="ivy-codemirror-tests" onChange=(action (mut value)) value=value}}`);
+test('it sends a "valueUpdated" action when the value of the CodeMirror instance changes', function(assert) {
+  this.render(hbs`{{ivy-codemirror id="ivy-codemirror-tests" valueUpdated=(action (mut value)) value=value}}`);
   const instance = this.codeMirror.instanceFor('ivy-codemirror-tests');
 
   instance.setValue('2');
