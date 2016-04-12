@@ -16,7 +16,9 @@ export default Ember.Component.extend({
     this._super(...arguments);
 
     this._codeMirror = CodeMirror.fromTextArea(this.get('element'));
-    this.setupCodeMirrorEventHandler('change', this, this.codeMirrorOnChange);
+
+    // Fire an "onChange" action when CodeMirror triggers a "change" event.
+    this.setupCodeMirrorEventHandler('change', this, this.sendOnChangeAction);
 
     // Private action used by tests. Do not rely on this in your apps.
     this.sendAction('_onReady', this._codeMirror);
@@ -29,7 +31,7 @@ export default Ember.Component.extend({
     this.updateCodeMirrorValue();
   },
 
-  codeMirrorOnChange(codeMirror) {
+  sendOnChangeAction(codeMirror) {
     this.sendAction('onChange', codeMirror.getValue());
   },
 
