@@ -25,9 +25,7 @@ export default Ember.Component.extend({
     this._super(...arguments);
 
     this._codeMirror = CodeMirror.fromTextArea(this.get('element'));
-
-    // Set up handlers for CodeMirror events.
-    this._bindCodeMirrorEvent('change', this, '_updateValue');
+    this.setupCodeMirrorEventHandler('change', this, this.codeMirrorOnChange);
 
     // Private action used by tests. Do not rely on this in your apps.
     this.sendAction('_onReady', this._codeMirror);
@@ -38,6 +36,23 @@ export default Ember.Component.extend({
 
     this.updateCodeMirrorOptions();
     this.updateCodeMirrorValue();
+  },
+
+  codeMirrorOnChange(codeMirror, changeObj) {
+    const value = codeMirror.getValue();
+
+    this.set('value', value);
+    this.sendAction('valueUpdated', value, codeMirror, changeObj);
+  },
+
+  setupCodeMirrorEventHandler(event, target, method) {
+    const callback = Ember.run.bind(target, method);
+
+    this._codeMirror.on(event, callback);
+
+    this.one('willDestroyElement', this, function() {
+      this._codeMirror.off(event, callback);
+    });
   },
 
   updateCodeMirrorOption(option, value) {
@@ -69,33 +84,5 @@ export default Ember.Component.extend({
 
     // Remove the editor and restore the original textarea.
     this._codeMirror.toTextArea();
-  },
-
-  /**
-   * Bind a handler for `event`, to be torn down in `willDestroyElement`.
-   *
-   * @private
-   * @method _bindCodeMirrorEvent
-   */
-  _bindCodeMirrorEvent(event, target, method) {
-    const callback = Ember.run.bind(target, method);
-
-    this._codeMirror.on(event, callback);
-
-    this.on('willDestroyElement', this, function() {
-      this._codeMirror.off(event, callback);
-    });
-  },
-
-  /**
-   * Update the `value` property when a CodeMirror `change` event occurs.
-   *
-   * @private
-   * @method _updateValue
-   */
-  _updateValue(instance, changeObj) {
-    const value = instance.getValue();
-    this.set('value', value);
-    this.sendAction('valueUpdated', value, instance, changeObj);
   }
 });
