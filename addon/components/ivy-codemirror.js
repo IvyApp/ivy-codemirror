@@ -2,15 +2,6 @@ import CodeMirror from 'codemirror';
 import Ember from 'ember';
 
 export default Ember.Component.extend({
-  /**
-   * The value of the editor.
-   *
-   * @property value
-   * @type {String}
-   * @default null
-   */
-  value: null,
-
   tagName: 'textarea',
 
   becameVisible() {
