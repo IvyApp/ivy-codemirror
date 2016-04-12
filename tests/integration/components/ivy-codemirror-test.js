@@ -1,63 +1,64 @@
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 
+import CodeMirrorService from 'ivy-codemirror/services/code-mirror';
 import CodeMirror from 'codemirror';
 
+const FakeCodeMirrorService = CodeMirrorService.extend({
+  fromTextArea() {
+    return (this.instance = this._super(...arguments));
+  }
+});
+
 moduleForComponent('ivy-codemirror', 'Integration | Component | ivy-codemirror', {
-  integration: true
+  integration: true,
+
+  beforeEach() {
+    this.register('service:code-mirror', FakeCodeMirrorService);
+    this.inject.service('code-mirror', { as: 'codeMirror' });
+  }
 });
 
-test('it sets value on the CodeMirror editor', function(assert) {
-  this.render(hbs`{{ivy-codemirror _onReady=(action (mut codeMirror)) value=value}}`);
+test('it uses the `value` property to set the value of the CodeMirror instance', function(assert) {
+  this.set('value', '1');
+  this.render(hbs`{{ivy-codemirror value=value}}`);
 
-  const codeMirror = this.get('codeMirror');
+  assert.equal(this.codeMirror.instance.getValue(), '1');
 
-  this.set('value', 'foo');
-  assert.equal(codeMirror.getValue(), 'foo');
-
-  this.set('value', 'bar');
-  assert.equal(codeMirror.getValue(), 'bar');
+  this.set('value', '2');
+  assert.equal(this.codeMirror.instance.getValue(), '2');
 });
 
-test('it sends an "onChange" action when CodeMirror "change" events occur', function(assert) {
-  this.render(hbs`{{ivy-codemirror _onReady=(action (mut codeMirror)) onChange=(action (mut value))}}`);
+test('it sends an "onChange" action when the value of the CodeMirror instance changes', function(assert) {
+  this.render(hbs`{{ivy-codemirror onChange=(action (mut value)) value=value}}`);
 
-  const codeMirror = this.get('codeMirror');
+  this.codeMirror.instance.setValue('2');
+  CodeMirror.signal(this.codeMirror.instance, 'change', this.codeMirror.instance);
 
-  codeMirror.setValue('foo');
-  CodeMirror.signal(codeMirror, 'change', codeMirror);
-  assert.equal(this.get('value'), 'foo');
-
-  codeMirror.setValue('bar');
-  CodeMirror.signal(codeMirror, 'change', codeMirror);
-  assert.equal(this.get('value'), 'bar');
+  assert.equal(this.get('value'), '2');
 });
 
-test('it refreshes when isVisible becomes true', function(assert) {
-  this.render(hbs`{{ivy-codemirror _onReady=(action (mut codeMirror)) isVisible=isVisible}}`);
+test('it refreshes when the `isVisible` property becomes true', function(assert) {
+  this.render(hbs`{{ivy-codemirror isVisible=isVisible}}`);
 
-  const codeMirror = this.get('codeMirror');
-
-  let refreshCalls = 0;
-  codeMirror.refresh = function() {
-    refreshCalls++;
+  let refreshCalled = 0;
+  this.codeMirror.instance.refresh = function() {
+    refreshCalled++;
   };
 
   this.set('isVisible', false);
-  assert.equal(refreshCalls, 0);
+  assert.equal(refreshCalled, 0);
 
   this.set('isVisible', true);
-  assert.equal(refreshCalls, 1);
+  assert.equal(refreshCalled, 1);
 });
 
-test('it sets options on the CodeMirror editor', function(assert) {
-  this.render(hbs`{{ivy-codemirror _onReady=(action (mut codeMirror)) options=(hash lineNumbers=lineNumbers)}}`);
-
-  const codeMirror = this.get('codeMirror');
-
+test('it uses the `options` property to set options on the CodeMirror instance', function(assert) {
   this.set('lineNumbers', true);
-  assert.equal(codeMirror.getOption('lineNumbers'), true);
+  this.render(hbs`{{ivy-codemirror options=(hash lineNumbers=lineNumbers)}}`);
+
+  assert.equal(this.codeMirror.instance.getOption('lineNumbers'), true);
 
   this.set('lineNumbers', false);
-  assert.equal(codeMirror.getOption('lineNumbers'), false);
+  assert.equal(this.codeMirror.instance.getOption('lineNumbers'), false);
 });
