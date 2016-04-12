@@ -84,5 +84,7 @@ export default Ember.Component.extend({
 
     // Remove the editor and restore the original textarea.
     this._codeMirror.toTextArea();
+
+    delete this._codeMirror;
   }
 });
