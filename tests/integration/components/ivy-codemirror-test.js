@@ -19,8 +19,8 @@ test('it sets value on the CodeMirror editor', function(assert) {
   assert.equal(codeMirror.getValue(), 'bar');
 });
 
-test('it sends a "valueUpdated" action when CodeMirror "change" events occur', function(assert) {
-  this.render(hbs`{{ivy-codemirror _onReady=(action (mut codeMirror)) valueUpdated=(action (mut value))}}`);
+test('it sends an "onChange" action when CodeMirror "change" events occur', function(assert) {
+  this.render(hbs`{{ivy-codemirror _onReady=(action (mut codeMirror)) onChange=(action (mut value))}}`);
 
   const codeMirror = this.get('codeMirror');
 

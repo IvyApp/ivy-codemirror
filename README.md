@@ -21,8 +21,47 @@ ember install ember-hash-helper-polyfill
 
 ## Usage
 
+This addon provides an `ivy-codemirror` component which wraps a CodeMirror
+editor. You can set its `value` property to the code that you want to be
+displayed:
+
 ```handlebars
 {{ivy-codemirror value=myCode}}
+```
+
+### Data Down, Actions Up
+
+In the spirit of [Data Down, Actions
+Up](https://dockyard.com/blog/2015/10/14/best-practices-data-down-actions-up),
+the `value` **will not be modified directly**. Instead, when a CodeMirror
+`change` event occurs, an `onChange` action will be sent, and will be given the
+new value as an argument. You might implement this action handler like so:
+
+```handlebars
+<!-- app/templates/index.hbs -->
+{{ivy-codemirror onChange=(action "updateMyCode") value=myCode}}
+```
+
+```javascript
+// app/controllers/index.js
+import Ember from 'ember';
+
+export default Ember.Controller.extend({
+  actions: {
+    updateMyCode(newCode) {
+      this.set('myCode', newCode);
+    }
+  }
+});
+```
+
+However, for this simple use case, Ember provides the built-in `mut` helper. You
+could use this helper in your template instead of writing the action handler
+yourself, like so:
+
+```handlebars
+<!-- app/templates/index.hbs -->
+{{ivy-codemirror onChange=(action (mut myCode)) value=myCode}}
 ```
 
 ### Options

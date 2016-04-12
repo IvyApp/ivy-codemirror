@@ -29,11 +29,8 @@ export default Ember.Component.extend({
     this.updateCodeMirrorValue();
   },
 
-  codeMirrorOnChange(codeMirror, changeObj) {
-    const value = codeMirror.getValue();
-
-    this.set('value', value);
-    this.sendAction('valueUpdated', value, codeMirror, changeObj);
+  codeMirrorOnChange(codeMirror) {
+    this.sendAction('onChange', codeMirror.getValue());
   },
 
   setupCodeMirrorEventHandler(event, target, method) {
