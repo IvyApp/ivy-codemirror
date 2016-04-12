@@ -16,7 +16,7 @@ export default Ember.Component.extend({
   didInsertElement() {
     this._super(...arguments);
 
-    this._codeMirror = this.get('codeMirror').fromTextArea(this.get('element'));
+    this._codeMirror = this.get('codeMirror').fromTextArea(this.get('elementId'), this.get('element'));
 
     // Fire an "onChange" action when CodeMirror triggers a "change" event.
     this.setupCodeMirrorEventHandler('change', this, this.sendOnChangeAction);
@@ -72,6 +72,8 @@ export default Ember.Component.extend({
 
     // Remove the editor and restore the original textarea.
     this._codeMirror.toTextArea();
+
+    this.get('codeMirror').unregisterInstance(this.get('elementId'));
 
     delete this._codeMirror;
   }

@@ -2,7 +2,30 @@ import CodeMirror from 'codemirror';
 import Ember from 'ember';
 
 export default Ember.Service.extend({
-  fromTextArea(textarea) {
-    return CodeMirror.fromTextArea(textarea);
+  init() {
+    this._super(...arguments);
+    this._instances = Object.create(null);
+  },
+
+  fromTextArea(id, textarea) {
+    return this.registerInstance(id, CodeMirror.fromTextArea(textarea));
+  },
+
+  instanceFor(id) {
+    return this._instances[id];
+  },
+
+  registerInstance(id, instance) {
+    this._instances[id] = instance;
+
+    return instance;
+  },
+
+  signal(emitter, type, ...values) {
+    CodeMirror.signal(emitter, type, ...values);
+  },
+
+  unregisterInstance(id) {
+    delete this._instances[id];
   }
 });
