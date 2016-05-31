@@ -1,5 +1,9 @@
 # ivy-codemirror
 
+## 2.0.1 (May 31, 2016)
+
+* [#18](https://github.com/IvyApp/ivy-codemirror/pull/18) Lazy Fastboot compatibility
+
 ## 2.0.0 (May 31, 2016)
 
 * Bump CodeMirror version to 5.15.x.
