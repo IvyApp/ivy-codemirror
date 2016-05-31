@@ -1,9 +1,11 @@
-import Ember from 'ember';
+import Component from 'ember-component';
+import injectService from 'ember-service/inject';
+import { bind, once } from 'ember-runloop';
 
-export default Ember.Component.extend({
+export default Component.extend({
   tagName: 'textarea',
 
-  codeMirror: Ember.inject.service(),
+  codeMirror: injectService(),
 
   becameVisible() {
     this._super(...arguments);
@@ -30,11 +32,11 @@ export default Ember.Component.extend({
   },
 
   scheduleValueUpdatedAction(codeMirror) {
-    Ember.run.once(this, this.sendValueUpdatedAction, codeMirror.getValue());
+    once(this, this.sendValueUpdatedAction, codeMirror.getValue());
   },
 
   setupCodeMirrorEventHandler(event, target, method) {
-    const callback = Ember.run.bind(target, method);
+    const callback = bind(target, method);
 
     this._codeMirror.on(event, callback);
 
