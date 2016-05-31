@@ -1,5 +1,20 @@
 # ivy-codemirror
 
+## 2.0.0
+
+* Bump CodeMirror version to 5.15.x.
+* Ensure `valueUpdated` is in the `actions` queue. This prevents `value` from
+  being changed within `didInsertElement`, which would cause Ember to emit a
+  deprecation warning.
+* Move CodeMirror initialization into a `code-mirror` service.
+* Following DDAU (Data Down, Actions Up), `ivy-codemirror` no longer sets its
+  `value` property directly. Instead, it sends the `valueUpdated` action and
+  expects the caller to handle changing the value.
+* Update value via `didRender` rather than observers.
+* Change how options are specified. Instead of setting individual options, such
+  as `autofocus`, `mode`, etc., `ivy-codemirror` now accepts an `options`
+  property, which is expected to be a hash of options.
+
 ## 1.4.0
 
 * Bump CodeMirror version to 5.13.x.
