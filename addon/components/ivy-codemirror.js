@@ -22,6 +22,14 @@ export default Component.extend({
 
     // Send a "valueUpdated" action when CodeMirror triggers a "change" event.
     this.setupCodeMirrorEventHandler('change', this, this.scheduleValueUpdatedAction);
+
+    const events = this.get('events');
+
+    if (events) {
+      Object.keys(events).forEach(function(eventName) {
+        this.setupCodeMirrorEventHandler(eventName, this, events[eventName]);
+      }, this);
+    }
   },
 
   didRender() {

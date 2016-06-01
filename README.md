@@ -54,6 +54,18 @@ However, for this simple use case, Ember provides the built-in `mut` helper. You
 {{ivy-codemirror value=myCode valueUpdated=(action (mut myCode))}}
 ```
 
+### Events
+
+In addition to the default `valueUpdated` action provided, you can also listen for arbitrary CodeMirror editor [events](http://codemirror.net/doc/manual.html#events) yourself, by passing `events` to the `ivy-codemirror` component, like so:
+
+```handlebars
+{{ivy-codemirror events=(hash change=(action "onChange"))}}
+```
+
+This would cause the `onChange` action to be sent whenever a CodeMirror `change` event occurs, passing along any arguments.
+
+Note that **these action handlers are unbound**. They are added once, during `didInsertElement`. Changing the `events` hash after that will not cause the action handlers to be updated.
+
 ### Options
 
 `ivy-codemirror` also allows passing [options](http://codemirror.net/doc/manual.html#config) to CodeMirror via the `options` property. The easiest way to do this is via Ember's built-in `hash` helper, like so:
