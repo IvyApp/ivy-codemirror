@@ -1,5 +1,9 @@
 # ivy-codemirror
 
+## 2.0.2 (June 1, 2016)
+
+* [#19](https://github.com/IvyApp/ivy-codemirror/pull/19) Put back missing params for valueUpdated
+
 ## 2.0.1 (May 31, 2016)
 
 * [#18](https://github.com/IvyApp/ivy-codemirror/pull/18) Lazy Fastboot compatibility
