@@ -31,8 +31,8 @@ export default Component.extend({
     this.updateCodeMirrorValue();
   },
 
-  scheduleValueUpdatedAction(codeMirror) {
-    once(this, this.sendValueUpdatedAction, codeMirror.getValue());
+  scheduleValueUpdatedAction(codeMirror, changeObj) {
+    once(this, this.sendValueUpdatedAction, codeMirror.getValue(), codeMirror, changeObj);
   },
 
   setupCodeMirrorEventHandler(event, target, method) {
@@ -45,8 +45,8 @@ export default Component.extend({
     });
   },
 
-  sendValueUpdatedAction(value) {
-    this.sendAction('valueUpdated', value);
+  sendValueUpdatedAction(...args) {
+    this.sendAction('valueUpdated', ...args);
   },
 
   updateCodeMirrorOption(option, value) {
