@@ -47,6 +47,7 @@
     "ember-cli-babel": "^5.1.7"
   },
   "ember-addon": {
-    "configPath": "tests/dummy/config"
+    "configPath": "tests/dummy/config",
+    "demoURL": "http://ivyapp.github.io/ivy-codemirror/"
   }
 }
