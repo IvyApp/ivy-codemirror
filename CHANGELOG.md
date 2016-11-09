@@ -1,5 +1,9 @@
 # ivy-codemirror
 
+## 2.0.3 (November 9, 2016)
+
+* [#23](https://github.com/IvyApp/ivy-codemirror/pull/23) Upgrade to Ember CLI 2.9.1
+
 ## 2.0.2 (June 1, 2016)
 
 * [#19](https://github.com/IvyApp/ivy-codemirror/pull/19) Put back missing params for valueUpdated
