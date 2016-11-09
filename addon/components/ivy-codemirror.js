@@ -1,19 +1,12 @@
 import Component from 'ember-component';
 import injectService from 'ember-service/inject';
-import { bind, once } from 'ember-runloop';
+import observer from 'ember-metal/observer';
+import { bind, once, scheduleOnce } from 'ember-runloop';
 
 export default Component.extend({
   tagName: 'textarea',
 
   codeMirror: injectService(),
-
-  becameVisible() {
-    this._super(...arguments);
-
-    // Force a refresh on `becameVisible`, since CodeMirror won't render itself
-    // onto a hidden element.
-    this._codeMirror.refresh();
-  },
 
   didInsertElement() {
     this._super(...arguments);
@@ -31,6 +24,14 @@ export default Component.extend({
     this.updateCodeMirrorValue();
   },
 
+  isVisibleDidChange: observer('isVisible', function() {
+    if (this._wasVisible === this.get('isVisible')) {
+      return;
+    }
+
+    scheduleOnce('render', this, this.toggleVisibility);
+  }),
+
   scheduleValueUpdatedAction(codeMirror, changeObj) {
     once(this, this.sendValueUpdatedAction, codeMirror.getValue(), codeMirror, changeObj);
   },
@@ -47,6 +48,22 @@ export default Component.extend({
 
   sendValueUpdatedAction(...args) {
     this.sendAction('valueUpdated', ...args);
+  },
+
+  toggleVisibility() {
+    const isVisible = this.get('isVisible');
+
+    if (this._wasVisible === isVisible) {
+      return;
+    }
+
+    this._wasVisible = isVisible;
+
+    if (isVisible) {
+      // Force a refresh when becoming visible, since CodeMirror won't render
+      // itself onto a hidden element.
+      this._codeMirror.refresh();
+    }
   },
 
   updateCodeMirrorOption(option, value) {
