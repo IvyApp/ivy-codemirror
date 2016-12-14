@@ -5,7 +5,7 @@ export default Ember.Controller.extend({
   lineNumbers: true,
   lineWrapping: false,
   mode: 'javascript',
-  keyMap: 'basic',
+  keyMap: 'default',
   readOnly: false,
   smartIndent: true,
   tabSize: 4,
@@ -115,6 +115,7 @@ export default Ember.Controller.extend({
 
   keyMaps: Ember.A([
     'basic',
+    'default',
     'emacs',
     'sublime',
     'vim'
