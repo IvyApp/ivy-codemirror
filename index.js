@@ -44,30 +44,32 @@ module.exports = {
       Object.assign(this.addonConfig, app.options.codemirror);
     }
 
-    if (!process.env.EMBER_CLI_FASTBOOT) {
-      app.import(app.bowerDirectory + '/codemirror/lib/codemirror.css');
-      app.import(app.bowerDirectory + '/codemirror/lib/codemirror.js');
-      app.import(app.bowerDirectory + '/codemirror/addon/mode/simple.js');
-      app.import(app.bowerDirectory + '/codemirror/addon/mode/multiplex.js');
-      app.import('vendor/htmlhandlebars.js');
-
-      this.addonConfig.modes.forEach(function(mode) {
-        app.import(app.bowerDirectory + '/codemirror/mode/' + mode + '/' + mode + '.js');
-      });
-
-      this.addonConfig.keyMaps.forEach(function(keyMap) {
-        app.import(app.bowerDirectory + '/codemirror/keymap/' + keyMap + '.js');
-      });
-
-      this.addonConfig.themes.forEach(function(theme) {
-        app.import(app.bowerDirectory + '/codemirror/theme/' + theme + '.css');
-      });
-
-      app.import('vendor/ivy-codemirror/shims.js', {
-        exports: {
-          'codemirror': ['default']
-        }
-      });
+    if (process.env.EMBER_CLI_FASTBOOT) {
+      return;
     }
+
+    app.import(app.bowerDirectory + '/codemirror/lib/codemirror.css');
+    app.import(app.bowerDirectory + '/codemirror/lib/codemirror.js');
+    app.import(app.bowerDirectory + '/codemirror/addon/mode/simple.js');
+    app.import(app.bowerDirectory + '/codemirror/addon/mode/multiplex.js');
+    app.import('vendor/htmlhandlebars.js');
+
+    this.addonConfig.modes.forEach(function(mode) {
+      app.import(app.bowerDirectory + '/codemirror/mode/' + mode + '/' + mode + '.js');
+    });
+
+    this.addonConfig.keyMaps.forEach(function(keyMap) {
+      app.import(app.bowerDirectory + '/codemirror/keymap/' + keyMap + '.js');
+    });
+
+    this.addonConfig.themes.forEach(function(theme) {
+      app.import(app.bowerDirectory + '/codemirror/theme/' + theme + '.css');
+    });
+
+    app.import('vendor/ivy-codemirror/shims.js', {
+      exports: {
+        'codemirror': ['default']
+      }
+    });
   }
 };
