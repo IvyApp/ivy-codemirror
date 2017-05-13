@@ -4,7 +4,34 @@
 module.exports = {
   name: 'ivy-codemirror',
 
-  included: function(app) {
+  /*
+   * Temporary workaround while there is a proper API for discovering
+   * assets within an in-repo-engine.
+   *
+   * For more info see the following issues:
+   *
+   * - https://github.com/dgeb/ember-engines/issues/226
+   * - https://github.com/miguelcobain/ember-leaflet/issues/106
+   * - https://github.com/ember-cli/ember-cli/pull/5877
+   *
+   * Solution copied from ember-run-raf https://github.com/runspired/ember-run-raf/pull/14/files
+   */
+  _findHost: function() {
+    var current = this;
+    var app;
+
+    // Keep iterating upward until we don't have a grandparent.
+    // Has to do this grandparent check because at some point we hit the project.
+    do {
+      app = current.app || app;
+    } while (current.parent.parent && (current = current.parent));
+
+    return app;
+  },
+
+  included: function() {
+    var app = this._findHost();
+
     var options = app.options.codemirror || {};
     var modes = options.modes || [];
     var keyMaps = options.keyMaps || [];
