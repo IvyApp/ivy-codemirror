@@ -29,13 +29,20 @@ module.exports = {
     return app;
   },
 
+  defaultAddonConfig: {
+    keyMaps: [],
+    modes: [],
+    themes: []
+  },
+
   included: function() {
     var app = this._findHost();
 
-    var options = app.options.codemirror || {};
-    var modes = options.modes || [];
-    var keyMaps = options.keyMaps || [];
-    var themes = options.themes || [];
+    this.addonConfig = Object.assign({}, this.defaultAddonConfig);
+
+    if (app.options.codemirror) {
+      Object.assign(this.addonConfig, app.options.codemirror);
+    }
 
     if (!process.env.EMBER_CLI_FASTBOOT) {
       app.import(app.bowerDirectory + '/codemirror/lib/codemirror.css');
@@ -44,15 +51,15 @@ module.exports = {
       app.import(app.bowerDirectory + '/codemirror/addon/mode/multiplex.js');
       app.import('vendor/htmlhandlebars.js');
 
-      modes.forEach(function(mode) {
+      this.addonConfig.modes.forEach(function(mode) {
         app.import(app.bowerDirectory + '/codemirror/mode/' + mode + '/' + mode + '.js');
       });
 
-      keyMaps.forEach(function(keyMap) {
+      this.addonConfig.keyMaps.forEach(function(keyMap) {
         app.import(app.bowerDirectory + '/codemirror/keymap/' + keyMap + '.js');
       });
 
-      themes.forEach(function(theme) {
+      this.addonConfig.themes.forEach(function(theme) {
         app.import(app.bowerDirectory + '/codemirror/theme/' + theme + '.css');
       });
 
