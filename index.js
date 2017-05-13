@@ -1,7 +1,17 @@
 /* eslint-env node */
 'use strict';
 
+var path = require('path');
+
 module.exports = {
+  init: function() {
+    this._super.init && this._super.init.apply(this, arguments);
+
+    if ('codemirror' in this.project.bowerDependencies()) {
+      this.ui.writeWarnLine('CodeMirror is now provided by node_module `ivy-codemirror`, please remove it from bower');
+    }
+  },
+
   name: 'ivy-codemirror',
 
   /*
@@ -29,38 +39,71 @@ module.exports = {
     return app;
   },
 
+  defaultAddonConfig: {
+    keyMaps: [],
+    modes: [],
+    themes: []
+  },
+
   included: function() {
     var app = this._findHost();
 
-    var options = app.options.codemirror || {};
-    var modes = options.modes || [];
-    var keyMaps = options.keyMaps || [];
-    var themes = options.themes || [];
+    this.addonConfig = Object.assign({}, this.defaultAddonConfig);
 
-    if (!process.env.EMBER_CLI_FASTBOOT) {
-      app.import(app.bowerDirectory + '/codemirror/lib/codemirror.css');
-      app.import(app.bowerDirectory + '/codemirror/lib/codemirror.js');
-      app.import(app.bowerDirectory + '/codemirror/addon/mode/simple.js');
-      app.import(app.bowerDirectory + '/codemirror/addon/mode/multiplex.js');
-      app.import('vendor/htmlhandlebars.js');
+    if (app.options.codemirror) {
+      Object.assign(this.addonConfig, app.options.codemirror);
+    }
 
-      modes.forEach(function(mode) {
-        app.import(app.bowerDirectory + '/codemirror/mode/' + mode + '/' + mode + '.js');
-      });
+    if (process.env.EMBER_CLI_FASTBOOT) {
+      return;
+    }
 
-      keyMaps.forEach(function(keyMap) {
-        app.import(app.bowerDirectory + '/codemirror/keymap/' + keyMap + '.js');
-      });
+    this._super.included.apply(this, arguments);
 
-      themes.forEach(function(theme) {
-        app.import(app.bowerDirectory + '/codemirror/theme/' + theme + '.css');
-      });
+    app.import('vendor/codemirror/lib/codemirror.js');
+    app.import('vendor/codemirror/addon/mode/simple.js');
+    app.import('vendor/codemirror/addon/mode/multiplex.js');
+    app.import('vendor/htmlhandlebars.js');
 
-      app.import('vendor/ivy-codemirror/shims.js', {
-        exports: {
-          'codemirror': ['default']
-        }
-      });
+    this.addonConfig.modes.forEach(function(mode) {
+      app.import(path.join('vendor/codemirror/mode', mode, mode + '.js'));
+    });
+
+    this.addonConfig.keyMaps.forEach(function(keyMap) {
+      app.import(path.join('vendor/codemirror/keymap', keyMap + '.js'));
+    });
+
+    app.import('vendor/ivy-codemirror/shims.js', {
+      exports: {
+        'codemirror': ['default']
+      }
+    });
+  },
+
+  options: {
+    nodeAssets: {
+      codemirror: function() {
+        var modeScripts = this.addonConfig.modes.map(function(mode) {
+          return path.join('mode', mode, mode + '.js');
+        });
+
+        var keyMapScripts = this.addonConfig.keyMaps.map(function(keyMap) {
+          return path.join('keymap', keyMap + '.js');
+        });
+
+        var themeStyles = this.addonConfig.themes.map(function(theme) {
+          return path.join('theme', theme + '.css');
+        });
+
+        return {
+          import: ['lib/codemirror.css'].concat(themeStyles),
+          vendor: [
+            'lib/codemirror.js',
+            'addon/mode/simple.js',
+            'addon/mode/multiplex.js'
+          ].concat(modeScripts, keyMapScripts)
+        };
+      }
     }
   }
 };
