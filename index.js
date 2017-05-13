@@ -1,6 +1,8 @@
 /* eslint-env node */
 'use strict';
 
+var path = require('path');
+
 module.exports = {
   name: 'ivy-codemirror',
 
@@ -48,22 +50,19 @@ module.exports = {
       return;
     }
 
-    app.import(app.bowerDirectory + '/codemirror/lib/codemirror.css');
-    app.import(app.bowerDirectory + '/codemirror/lib/codemirror.js');
-    app.import(app.bowerDirectory + '/codemirror/addon/mode/simple.js');
-    app.import(app.bowerDirectory + '/codemirror/addon/mode/multiplex.js');
+    this._super.included.apply(this, arguments);
+
+    app.import('vendor/codemirror/lib/codemirror.js');
+    app.import('vendor/codemirror/addon/mode/simple.js');
+    app.import('vendor/codemirror/addon/mode/multiplex.js');
     app.import('vendor/htmlhandlebars.js');
 
     this.addonConfig.modes.forEach(function(mode) {
-      app.import(app.bowerDirectory + '/codemirror/mode/' + mode + '/' + mode + '.js');
+      app.import(path.join('vendor/codemirror/mode', mode, mode + '.js'));
     });
 
     this.addonConfig.keyMaps.forEach(function(keyMap) {
-      app.import(app.bowerDirectory + '/codemirror/keymap/' + keyMap + '.js');
-    });
-
-    this.addonConfig.themes.forEach(function(theme) {
-      app.import(app.bowerDirectory + '/codemirror/theme/' + theme + '.css');
+      app.import(path.join('vendor/codemirror/keymap', keyMap + '.js'));
     });
 
     app.import('vendor/ivy-codemirror/shims.js', {
@@ -71,5 +70,32 @@ module.exports = {
         'codemirror': ['default']
       }
     });
+  },
+
+  options: {
+    nodeAssets: {
+      codemirror: function() {
+        var modeScripts = this.addonConfig.modes.map(function(mode) {
+          return path.join('mode', mode, mode + '.js');
+        });
+
+        var keyMapScripts = this.addonConfig.keyMaps.map(function(keyMap) {
+          return path.join('keymap', keyMap + '.js');
+        });
+
+        var themeStyles = this.addonConfig.themes.map(function(theme) {
+          return path.join('theme', theme + '.css');
+        });
+
+        return {
+          import: ['lib/codemirror.css'].concat(themeStyles),
+          vendor: [
+            'lib/codemirror.js',
+            'addon/mode/simple.js',
+            'addon/mode/multiplex.js'
+          ].concat(modeScripts, keyMapScripts)
+        };
+      }
+    }
   }
 };

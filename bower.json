@@ -1,7 +1,6 @@
 {
   "name": "ivy-codemirror",
   "dependencies": {
-    "bootstrap": "~3.3.1",
-    "codemirror": "~5.15.0"
+    "bootstrap": "~3.3.1"
   }
 }
