@@ -1,5 +1,11 @@
 # ivy-codemirror
 
+## 2.1.0 (May 13, 2017)
+
+* [#29](https://github.com/IvyApp/ivy-codemirror/pull/29) CodeMirror addon support
+* [#28](https://github.com/IvyApp/ivy-codemirror/pull/28) Remove Bower
+* [#27](https://github.com/IvyApp/ivy-codemirror/pull/27) Upgrade to Ember CLI 2.13
+
 ## 2.0.4 (May 12, 2017)
 
 * [#24](https://github.com/IvyApp/ivy-codemirror/pull/24) Fix this.import() issue for nested addons
