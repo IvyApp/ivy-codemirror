@@ -4,6 +4,14 @@
 var path = require('path');
 
 module.exports = {
+  init: function() {
+    this._super.init && this._super.init.apply(this, arguments);
+
+    if ('codemirror' in this.project.bowerDependencies()) {
+      this.ui.writeWarnLine('CodeMirror is now provided by node_module `ivy-codemirror`, please remove it from bower');
+    }
+  },
+
   name: 'ivy-codemirror',
 
   /*
