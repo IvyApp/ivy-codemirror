@@ -91,6 +91,20 @@ var app = new EmberApp({
 
 The example above would include `mode/javascript/javascript.js` and `keymap/vim.js` into `vendor.js`.
 
+### Addons
+
+In addition to the above, you can also include any CodeMirror addon files like so:
+
+```js
+var app = new EmberApp({
+  codemirror: {
+    addonFiles: ['lint/lint.css', 'lint/lint.js']
+  }
+});
+```
+
+The above example would add `lint/lint.css` to `vendor.css` and `lint/lint.js` to `vendor.js`.
+
 ## Contributing
 
 Fork this repo, make a new branch, and send a pull request. Make sure your change is tested or it won't be merged.

@@ -40,6 +40,7 @@ module.exports = {
   },
 
   defaultAddonConfig: {
+    addonFiles: [],
     keyMaps: [],
     modes: [],
     themes: []
@@ -61,8 +62,24 @@ module.exports = {
     this._super.included.apply(this, arguments);
 
     app.import('vendor/codemirror/lib/codemirror.js');
-    app.import('vendor/codemirror/addon/mode/simple.js');
-    app.import('vendor/codemirror/addon/mode/multiplex.js');
+
+    // These 2 addons are needed by the custom htmlhandlebars mode, so we need
+    // to ensure that they're loaded even if they weren't specified by the app.
+    if (this.addonConfig.addonFiles.indexOf('mode/simple.js') === -1) {
+      this.addonConfig.addonFiles.push('mode/simple.js');
+    }
+    if (this.addonConfig.addonFiles.indexOf('mode/multiplex.js') === -1) {
+      this.addonConfig.addonFiles.push('mode/multiplex.js');
+    }
+
+    this.addonConfig.addonFiles.forEach(function(addonFile) {
+      if (path.extname(addonFile) !== '.js') {
+        return;
+      }
+
+      app.import(path.join('vendor/codemirror/addon', addonFile));
+    });
+
     app.import('vendor/htmlhandlebars.js');
 
     this.addonConfig.modes.forEach(function(mode) {
@@ -83,6 +100,18 @@ module.exports = {
   options: {
     nodeAssets: {
       codemirror: function() {
+        var addonScripts = this.addonConfig.addonFiles.filter(function(addonFile) {
+          return path.extname(addonFile) === '.js';
+        }).map(function(addonFile) {
+          return path.join('addon', addonFile);
+        });
+
+        var addonStyles = this.addonConfig.addonFiles.filter(function(addonFile) {
+          return path.extname(addonFile) === '.css';
+        }).map(function(addonFile) {
+          return path.join('addon', addonFile);
+        });
+
         var modeScripts = this.addonConfig.modes.map(function(mode) {
           return path.join('mode', mode, mode + '.js');
         });
@@ -96,12 +125,12 @@ module.exports = {
         });
 
         return {
-          import: ['lib/codemirror.css'].concat(themeStyles),
+          import: ['lib/codemirror.css'].concat(addonStyles, themeStyles),
           vendor: [
             'lib/codemirror.js',
             'addon/mode/simple.js',
             'addon/mode/multiplex.js'
-          ].concat(modeScripts, keyMapScripts)
+          ].concat(addonScripts, modeScripts, keyMapScripts)
         };
       }
     }
