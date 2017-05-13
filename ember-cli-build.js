@@ -5,6 +5,10 @@ const path = require('path');
 module.exports = function(defaults) {
   var app = new EmberApp(defaults, {
     codemirror: {
+      addonFiles: [
+        'selection/active-line.js'
+      ],
+
       modes: [
         'apl',
         'asciiarmor',
