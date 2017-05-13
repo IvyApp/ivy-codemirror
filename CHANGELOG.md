@@ -1,5 +1,9 @@
 # ivy-codemirror
 
+## 2.0.4 (May 12, 2017)
+
+* [#24](https://github.com/IvyApp/ivy-codemirror/pull/24) Fix this.import() issue for nested addons
+
 ## 2.0.3 (November 9, 2016)
 
 * [#23](https://github.com/IvyApp/ivy-codemirror/pull/23) Upgrade to Ember CLI 2.9.1
