@@ -62,21 +62,34 @@ However, for this simple use case, Ember provides the built-in `mut` helper. You
 {{ivy-codemirror options=(hash lineNumbers=true mode="javascript")}}
 ```
 
-### Themes / Modes
+### Themes
 
-By default, only `codemirror.css` (CodeMirror's default theme) is included. To include more themes, modes, and key maps, add `codemirror` options to `ember-cli-build.js` inside your app:
+By default, only CodeMirror's default theme (found in `codemirror.css`) is included. Additional themes can be included by specifying them in your `ember-cli-build.js` file:
+
+```js
+var app = new EmberApp({
+  codemirror: {
+    themes: ['solarized', 'twilight']
+  }
+});
+```
+
+The example above would include `themes/solarized.css` and `themes/twilight.css` into `vendor.css`.
+
+### Modes & Key Maps
+
+In addition to themes, you can also include language modes and key maps via the `modes` and `keyMaps` options, respectively:
 
 ```js
 var app = new EmberApp({
   codemirror: {
     modes: ['javascript'],
-    keyMaps: ['vim'],
-    themes: ['solarized']
+    keyMaps: ['vim']
   }
 });
 ```
 
-The above example would pull in `mode/javascript/javascript.js`, `keymap/vim.js`, `theme/solarized.css` from CodeMirror and add them to `vendor.js` and `vendor.css`, respectively.
+The example above would include `mode/javascript/javascript.js` and `keymap/vim.js` into `vendor.js`.
 
 ## Contributing
 
