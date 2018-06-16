@@ -1,7 +1,7 @@
-import Component from 'ember-component';
-import injectService from 'ember-service/inject';
-import observer from 'ember-metal/observer';
-import { bind, once, scheduleOnce } from 'ember-runloop';
+import Component from '@ember/component';
+import { inject as injectService } from '@ember/service';
+import { observer } from '@ember/object';
+import { bind, once, scheduleOnce } from '@ember/runloop';
 
 export default Component.extend({
   tagName: 'textarea',
@@ -47,7 +47,7 @@ export default Component.extend({
   },
 
   sendValueUpdatedAction(...args) {
-    this.sendAction('valueUpdated', ...args);
+    this.sendAction('valueUpdated', ...args); // eslint-disable-line ember/closure-actions
   },
 
   toggleVisibility() {

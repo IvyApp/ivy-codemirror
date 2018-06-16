@@ -1,7 +1,8 @@
-import Ember from 'ember';
+import { A } from '@ember/array';
+import Controller from '@ember/controller';
 import config from '../config/environment';
 
-export default Ember.Controller.extend({
+export default Controller.extend({
   lineNumbers: true,
   lineWrapping: false,
   mode: 'javascript',
@@ -12,7 +13,7 @@ export default Ember.Controller.extend({
   theme: 'ambiance',
   value: config.APP.codeSample,
 
-  modes: Ember.A([
+  modes: A([
     'apl',
     'asciiarmor',
     'asn.1',
@@ -113,7 +114,7 @@ export default Ember.Controller.extend({
     'z80'
   ]),
 
-  keyMaps: Ember.A([
+  keyMaps: A([
     'basic',
     'default',
     'emacs',
@@ -121,7 +122,7 @@ export default Ember.Controller.extend({
     'vim'
   ]),
 
-  themes: Ember.A([
+  themes: A([
     '3024-day',
     '3024-night',
     'ambiance',
