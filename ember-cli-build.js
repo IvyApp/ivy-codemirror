@@ -1,9 +1,9 @@
-/* eslint-env node */
-const EmberApp = require('ember-cli/lib/broccoli/ember-addon');
+'use strict';
+const EmberAddon = require('ember-cli/lib/broccoli/ember-addon');
 const path = require('path');
 
 module.exports = function(defaults) {
-  var app = new EmberApp(defaults, {
+  let app = new EmberAddon(defaults, {
     codemirror: {
       addonFiles: [
         'selection/active-line.js'
