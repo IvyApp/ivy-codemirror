@@ -113,8 +113,8 @@ To run tests:
 
 ```sh
 git clone # <this repo>
-npm install
-npm test
+yarn install
+yarn test
 ```
 
 Or, to start a test server that continually runs (for development):
