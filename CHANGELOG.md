@@ -1,5 +1,9 @@
 # ivy-codemirror
 
+## Unreleased
+
+* [#38](https://github.com/IvyApp/ivy-codemirror/pull/38) Upgrade to Ember CLI 3.1.4
+
 ## 2.1.0 (May 13, 2017)
 
 * [#29](https://github.com/IvyApp/ivy-codemirror/pull/29) CodeMirror addon support
