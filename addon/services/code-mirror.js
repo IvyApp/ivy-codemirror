@@ -1,5 +1,5 @@
 import CodeMirror from 'codemirror';
-import Service from 'ember-service';
+import Service from '@ember/service';
 
 export default Service.extend({
   init() {
