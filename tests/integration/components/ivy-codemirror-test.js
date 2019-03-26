@@ -30,6 +30,18 @@ test('it sends a "valueUpdated" action when the value of the CodeMirror instance
   assert.equal(this.get('value'), '2');
 });
 
+test('the "valueUpdated" action works using string-based actions for backwards compatability', function(assert) {
+  this.on('setValue', val => this.set('value', val));
+
+  this.render(hbs`{{ivy-codemirror id="ivy-codemirror-tests" valueUpdated="setValue" value=value}}`);
+  const instance = this.codeMirror.instanceFor('ivy-codemirror-tests');
+
+  instance.setValue('2');
+  this.codeMirror.signal(instance, 'change', instance);
+
+  assert.equal(this.get('value'), '2');
+});
+
 test('it refreshes when the `isVisible` property becomes true', function(assert) {
   this.render(hbs`{{ivy-codemirror id="ivy-codemirror-tests" isVisible=isVisible}}`);
   const instance = this.codeMirror.instanceFor('ivy-codemirror-tests');
