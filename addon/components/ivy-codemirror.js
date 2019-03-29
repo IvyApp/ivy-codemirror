@@ -47,7 +47,13 @@ export default Component.extend({
   },
 
   sendValueUpdatedAction(...args) {
-    this.sendAction('valueUpdated', ...args); // eslint-disable-line ember/closure-actions
+    const valueUpdated = this.get('valueUpdated');
+    if (typeof valueUpdated === 'function') {
+      valueUpdated(...args);
+    } else if (valueUpdated) {
+      // DEPRECATED: sendAction is deprecated as of Ember 3.4
+      this.sendAction('valueUpdated', ...args); // eslint-disable-line ember/closure-actions
+    }
   },
 
   toggleVisibility() {
