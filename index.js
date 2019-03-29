@@ -11,7 +11,7 @@ module.exports = {
     }
   },
 
-  name: 'ivy-codemirror',
+  name: require('./package').name,
 
   /*
    * Temporary workaround while there is a proper API for discovering

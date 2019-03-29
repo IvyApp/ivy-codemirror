@@ -1,6 +1,6 @@
 'use strict';
+
 const EmberAddon = require('ember-cli/lib/broccoli/ember-addon');
-const path = require('path');
 
 module.exports = function(defaults) {
   let app = new EmberAddon(defaults, {
@@ -157,7 +157,7 @@ module.exports = function(defaults) {
     behave. You most likely want to be modifying `./index.js` or app's build file
   */
 
-  app.import(path.join(app.bowerDirectory, 'bootstrap/dist/css/bootstrap.min.css'));
+  app.import('node_modules/bootstrap/dist/css/bootstrap.min.css');
 
   return app.toTree();
 };
