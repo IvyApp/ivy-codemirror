@@ -1,6 +1,7 @@
 # ivy-codemirror
 
 [![Build Status](https://travis-ci.org/IvyApp/ivy-codemirror.svg?branch=master)](https://travis-ci.org/IvyApp/ivy-codemirror)
+[![Dependabot Status](https://api.dependabot.com/badges/status?host=github&repo=IvyApp/ivy-codemirror)](https://dependabot.com)
 [![Ember Observer Score](http://emberobserver.com/badges/ivy-codemirror.svg)](http://emberobserver.com/addons/ivy-codemirror)
 
 An [Ember](http://emberjs.com) component for the excellent [CodeMirror](http://codemirror.net) editor.
