@@ -23,7 +23,7 @@
     "deploy": "ember github-pages:commit --message \"Deploy gh-pages from commit $(git rev-parse HEAD)\""
   },
   "dependencies": {
-    "codemirror": "~5.15.0",
+    "codemirror": "~5.38.0",
     "ember-cli-babel": "^7.1.2",
     "ember-cli-node-assets": "^0.2.2"
   },
