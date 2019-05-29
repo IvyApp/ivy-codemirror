@@ -24,6 +24,7 @@ export default Component.extend({
     this.updateCodeMirrorValue();
   },
 
+  // eslint-disable-next-line ember/no-observers
   isVisibleDidChange: observer('isVisible', function() {
     if (this._wasVisible === this.get('isVisible')) {
       return;
